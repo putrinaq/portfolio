@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@splinetool/runtime": "^1.10.88",
     "fonts.css": "^2.0.0",
     "locomotive-scroll": "^4.1.4"
   },

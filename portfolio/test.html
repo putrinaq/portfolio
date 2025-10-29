@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Spline + Locomotive Scroll + Camera Panel</title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				overflow-x: hidden;
+				font-family: Arial, system-ui, sans-serif;
+				background: #000;
+			}
+
+			/* Spline canvas sits behind everything */
+			#canvas3d {
+				position: fixed;
+				inset: 0;
+				width: 100vw;
+				height: 100vh;
+				z-index: 0;
+				pointer-events: none;
+			}
+
+			#loading {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 100;
+				background: rgba(255, 255, 255, 0.9);
+				color: #333;
+				padding: 20px 40px;
+				border-radius: 10px;
+				font-weight: 600;
+			}
+
+			[data-scroll-container] {
+				position: relative;
+				z-index: 1;
+			}
+
+			#mainNavbar {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				padding: 30px 50px;
+				z-index: 10;
+				color: #fff;
+				transition: all 0.3s ease;
+				mix-blend-mode: difference;
+			}
+			#mainNavbar.scrolled {
+				background: rgba(0, 0, 0, 0.75);
+				backdrop-filter: blur(10px);
+				padding: 20px 50px;
+				mix-blend-mode: normal;
+			}
+
+			.content-section {
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0 20px;
+			}
+			.content-section h2 {
+				font-size: clamp(2rem, 8vw, 4rem);
+				color: #fff;
+				text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+				text-align: center;
+			}
+
+			html.has-scroll-smooth {
+				overflow: hidden;
+			}
+			html.has-scroll-dragging {
+				user-select: none;
+			}
+
+			/* Camera control panel */
+			#camPanel {
+				position: fixed;
+				right: 12px;
+				top: 12px;
+				z-index: 20;
+				background: rgba(0, 0, 0, 0.6);
+				color: #fff;
+				padding: 12px 14px;
+				border-radius: 12px;
+				width: 240px;
+				backdrop-filter: blur(6px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+			}
+			#camPanel[hidden] {
+				display: none;
+			}
+			#camPanel strong {
+				display: block;
+				margin-bottom: 6px;
+			}
+			#camPanel label {
+				display: flex;
+				justify-content: space-between;
+				gap: 8px;
+				margin: 8px 0 4px;
+			}
+			#camPanel input[type="range"] {
+				width: 100%;
+			}
+			#camPanel .row {
+				display: flex;
+				gap: 8px;
+			}
+			#camPanel .row > div {
+				flex: 1;
+			}
+			#camPanel button {
+				width: 100%;
+				margin-top: 8px;
+				padding: 8px 10px;
+				border-radius: 8px;
+				border: 0;
+				background: #fff;
+				color: #000;
+				font-weight: 600;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loading">Loading 3D Scene...</div>
+		<canvas id="canvas3d"></canvas>
+
+		<!-- Camera control panel -->
+		<div id="camPanel" hidden>
+			<strong>Camera</strong>
+
+			<label>Zoom <span id="zoomVal">1.00</span></label>
+			<input
+				id="zoom"
+				type="range"
+				min="0.5"
+				max="2.0"
+				step="0.01"
+				value="1.00" />
+
+			<label>Z (distance) <span id="zVal">800</span></label>
+			<input id="posZ" type="range" min="200" max="2000" step="1" value="800" />
+
+			<div class="row">
+				<div>
+					<label>X° <span id="rxVal">0</span></label>
+					<input id="rotX" type="range" min="-60" max="60" step="1" value="0" />
+				</div>
+				<div>
+					<label>Y° <span id="ryVal">0</span></label>
+					<input
+						id="rotY"
+						type="range"
+						min="-120"
+						max="120"
+						step="1"
+						value="0" />
+				</div>
+			</div>
+
+			<button id="camReset">Reset</button>
+		</div>
+
+		<!-- Content -->
+		<div data-scroll-container>
+			<nav id="mainNavbar"><h1>My Website</h1></nav>
+
+			<section class="content-section" data-scroll-section>
+				<h2 data-scroll data-scroll-speed="1">Welcome</h2>
+			</section>
+			<section class="content-section" data-scroll-section>
+				<h2 data-scroll data-scroll-speed="0.5">About</h2>
+			</section>
+			<section class="content-section" data-scroll-section>
+				<h2 data-scroll data-scroll-speed="0.5">Contact</h2>
+			</section>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+		<script type="module">
+			import { Application } from "https://unpkg.com/@splinetool/runtime@latest/build/runtime.js";
+
+			// Locomotive Scroll
+			const scroll = new LocomotiveScroll({
+				el: document.querySelector("[data-scroll-container]"),
+				smooth: true,
+				multiplier: 1,
+				smartphone: { smooth: false },
+				tablet: { smooth: false },
+			});
+
+			const navbar = document.getElementById("mainNavbar");
+			scroll.on("scroll", ({ scroll: { y } }) => {
+				if (y > 50) navbar.classList.add("scrolled");
+				else navbar.classList.remove("scrolled");
+			});
+
+			// Spline
+			const canvas = document.getElementById("canvas3d");
+			const loading = document.getElementById("loading");
+			const app = new Application(canvas);
+
+			// Camera panel hooks
+			const panel = document.getElementById("camPanel");
+			const zoom = document.getElementById("zoom");
+			const posZ = document.getElementById("posZ");
+			const rotX = document.getElementById("rotX");
+			const rotY = document.getElementById("rotY");
+			const zoomVal = document.getElementById("zoomVal");
+			const zVal = document.getElementById("zVal");
+			const rxVal = document.getElementById("rxVal");
+			const ryVal = document.getElementById("ryVal");
+			const resetBtn = document.getElementById("camReset");
+
+			let cam = null; // active camera reference
+
+			const deg2rad = (d) => (d * Math.PI) / 180;
+
+			function applyFromUI() {
+				// Zoom is reliable across scenes
+				if (app.setZoom) app.setZoom(parseFloat(zoom.value));
+				zoomVal.textContent = parseFloat(zoom.value).toFixed(2);
+
+				// Position/rotation apply when we actually control the active/default camera
+				if (cam) {
+					cam.position.z = parseFloat(posZ.value);
+					zVal.textContent = posZ.value;
+
+					cam.rotation.x = deg2rad(parseFloat(rotX.value));
+					rxVal.textContent = rotX.value;
+					cam.rotation.y = deg2rad(parseFloat(rotY.value));
+					ryVal.textContent = rotY.value;
+				}
+			}
+
+			[zoom, posZ, rotX, rotY].forEach((inp) =>
+				inp.addEventListener("input", applyFromUI)
+			);
+			resetBtn.addEventListener("click", () => {
+				zoom.value = "1.00";
+				posZ.value = "800";
+				rotX.value = "0";
+				rotY.value = "0";
+				applyFromUI();
+			});
+
+			app
+				.load("https://prod.spline.design/txYKp2duF-CR9LUa/scene.splinecode")
+				.then(() => {
+					loading.style.display = "none";
+					scroll.update();
+
+					// Prefer the camera set as "Default Camera" in Spline.
+					cam =
+						app.findObjectByName("Camera") ||
+						app.findObjectByName("Camera1") ||
+						app.camera;
+
+					// Show the panel if we have something to control
+					panel.hidden = !(cam || app.setZoom);
+
+					// Set sane initial values (match panel defaults)
+					try {
+						if (app.setZoom) app.setZoom(1.0);
+						if (cam) {
+							cam.position.z = 800;
+							cam.rotation.x = 0;
+							cam.rotation.y = 0;
+						}
+					} catch (e) {
+						console.warn("Init camera setup failed:", e);
+					}
+
+					applyFromUI();
+				})
+				.catch((error) => {
+					console.error("Error loading scene:", error);
+					loading.textContent = "Error loading 3D scene";
+					loading.style.background = "rgba(255,0,0,0.1)";
+					loading.style.color = "red";
+				});
+
+			// Keep Locomotive in sync
+			window.addEventListener("resize", () => scroll.update());
+			new MutationObserver(() => scroll.update()).observe(document.body, {
+				childList: true,
+				subtree: true,
+			});
+		</script>
+	</body>
+</html>

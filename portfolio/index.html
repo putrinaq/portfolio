@@ -1,194 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Putri's Portfolio</title>
+		<meta
+			name="description"
+			content="Putri Naqibah Balqis is a highly skilled UI/UX designer..." />
 
-    <title>Putri's Portfolio</title>
-    <link rel="stylesheet" href="./assets/css/homepage.css">
-    <link rel="stylesheet" href="./assets/css/about.css">
-    <link  rel="stylesheet" href="./assets/css/fonts.css">
+		<link rel="icon" type="image/x-icon" href="../assets/favicon.png" />
+		<link rel="stylesheet" href="../assets/css/fonts.css" />
+		<link rel="stylesheet" href="../assets/css/styles.css" />
+	</head>
+	<nav id="mainNavbar">
+		<div class="brand">
+			<a href="#">PUTRI</a>
+		</div>
 
-    <link rel="icon" href="assets/favicon.png" type="image/png">
+		<ul class="nav-links" id="nav-links">
+			<li><a href="#home">HOME</a></li>
+			<li><a href="#projects">PROJECTS</a></li>
+			<li><a href="#about">ABOUT ME</a></li>
+			<li class="brand-desktop"><a href="#">Putri</a></li>
+			<li><a href="#work">WORK EXPERIENCE</a></li>
+			<li><a href="#education">EDUCATION</a></li>
+			<li><a href="#skills">SKILLS</a></li>
+		</ul>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="assets/css/locomotive-scroll.css">
+		<div class="hamburger" id="hamburger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</nav>
+	<body data-scroll-container>
+		<section class="hero-section" data-scroll-section id="home">
+			<video autoplay muted loop playsinline id="bg-video">
+				<source
+					src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/2025-10-28%2023-05-26.mp4?alt=media"
+					type="video/mp4" />
+			</video>
 
+			<div class="hero-content" data-scroll-section>
+				<h1 class="name">PUTRI NAQIBAH BALQIS</h1>
+				<div class="expertise">
+					<p>Software Developer</p>
+					<p>UI/UX Designer</p>
+					<p>Front-end Developer</p>
+					<p>IT Techinician</p>
+					<p>SEO Engineer</p>
+					<p>Data Analyst</p>
+				</div>
+				<div class="cta-wrapper">
+					<a href="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/PUTRI_NAQIBAH_BALQIS.pdf?alt=media"> <button class="btn-cta">Download Resume</button> </a>
+					<a href="mailto:putri@putrinaqibah.com">
+						<button class="btn-cta">Hire Me</button>
+					</a>
+					<a href="https://www.linkedin.com/in/putrinaqibah/">
+						<button class="btn-cta icon-btn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								id="Layer_1"
+								data-name="Layer 1"
+								viewBox="0 0 288 232.67">
+								<defs>
+									<style>
+										.cls-1 {
+											fill: #fff;
+											stroke-width: 0px;
+										}
+									</style>
+								</defs>
+								<path
+									class="cls-1"
+									d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" />
+							</svg>
+						</button>
+					</a>
+					<a href="https://github.com/putrinaq">
+						<button class="btn-cta icon-btn">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media"
+								alt="GitHub"
+								class="icon-img" />
+						</button>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section class="section-container" id="projects" data-scroll-section>
+			<div class="container">
+				<h2 class="section-title">Projects</h2>
+				<div class="projects-container">
+					<!-- Card 1 -->
+					<div class="project-card">
+						<div class="card-image">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/unimas-trace-homepage.png?alt=media"
+								alt="UNIMAS TRACE" />
+						</div>
 
-</head>
-<meta name="description" content="Putri Naqibah Balqis is a highly skilled and versatile UI/UX designer, web developer, and graphic designer based in Melaka and Kuala Lumpur, Malaysia. With a deep passion for creating beautiful and functional designs, she has a broad range of expertise in various technologies and tools, including HTML, CSS, Javascript, C++, C#, Java, PHP, Figma, Illustrator, Photoshop, Cisco Router, and computer repair.
+						<div class="card-content">
+							<div class="card-header">
+								<h2 class="card-title">UNIMAS TRACE</h2>
+								<div class="tech-stack">
+									<!-- Firebase -->
+									<span class="tech-icon" title="Firebase">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M3.89 15.672L6.255.461A.542.542 0 017.27.288l2.543 4.771zm16.794 3.692l-2.25-14.109a.542.542 0 00-.919-.295L3.316 19.365l7.856 4.427a1.621 1.621 0 001.588 0zM14.3 7.147l-1.82-3.482a.542.542 0 00-.96 0L3.53 17.984z" />
+										</svg>
+									</span>
+									<span class="tech-icon" title="HTML5">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+										</svg>
+									</span>
+									<span class="tech-icon" title="CSS3">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z" />
+										</svg>
+									</span>
+									<!-- JavaScript -->
+									<span class="tech-icon" title="JavaScript">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+										</svg>
+									</span>
+									<span class="tech-icon" title="GitHub">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+										</svg>
+									</span>
+								</div>
+							</div>
 
-As a UI/UX designer, Putri excels at creating intuitive and user-friendly interfaces for websites and mobile apps. Her design skills allow her to craft stunning visual elements that engage users and enhance their experience. She also has experience in graphic design, which she applies to create eye-catching logos, marketing materials, and other visual assets that effectively communicate brand messages.
+							<p class="card-description">
+								Premier university career platform serving 1,000+ students and
+								ranking #1 on Google for "UNIMAS career fair" above official
+								pages. Coordinated recruitment events with Ernst & Young, Public
+								Bank, and Habib Group over 2-year development cycle.
+							</p>
 
-In web development, Putri has experience in creating responsive and dynamic websites that are fast, secure, and optimized for search engines. She also has experience in programming languages such as C++, C#, Java, and PHP, which allow her to create complex web applications and customize website functionalities according to clients' needs.
+							<div class="card-impact">
+								<h3 class="impact-title">Impact</h3>
+								<p class="impact-text">
+									Established TRACE as UNIMAS's primary career resource through
+									sustained SEO strategy and organic traffic growth, surpassing
+									institutional competition and connecting students with major
+									employers.
+								</p>
+							</div>
+							<br/>
+<a href="case-studies/unimas-trace-career-platform.html">
+							<button class="case-study-btn">
+								Case Study
+								<svg
+									class="arrow-icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor">
+									<path
+										d="M5 12h14M12 5l7 7-7 7"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+							</a>
+						</div>
+					</div>
 
-In addition to her design and development skills, Putri is also a knowledgeable IT technician who can troubleshoot and repair computer systems, networks, and other technical issues. This makes her a valuable asset to any team, as she can tackle a wide range of challenges with efficiency and effectiveness.
+					<!-- Card 2 -->
+					<div class="project-card">
+						<div class="card-image">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Nothing%20Phone%2C%20PSD.webp?alt=media"
+								alt="MAIA AI Health App" />
+						</div>
 
-Putri's portfolio showcases her impressive work in web design, graphic design, and product design. Her attention to detail, creativity, and technical skills make her an excellent candidate for any project, whether it's a website redesign, a mobile app development, or a branding project.
+						<div class="card-content">
+							<div class="card-header">
+								<h2 class="card-title">MAIA | AI HEALTH APP FOR THE ELDERLY</h2>
+								<div class="tech-stack">
+									<span class="tech-icon" title="Figma">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" />
+										</svg>
+									</span>
+								</div>
+							</div>
 
-If you're looking for a reliable and skilled designer and developer who can bring your vision to life, explore Putri's portfolio today and get in touch to discuss your project.">
+							<p class="card-description">
+								Healthcare AI prototype for elderly patients with chronic
+								conditions. Led 300+ hours of UX research, implementing
+								accessibility-first design for users with cognitive limitations
+								across patient-caregiver-doctor workflows.
+							</p>
 
-<body class="body">
-<nav class="navbar navbar-expand-lg navbar-dark">
+							<div class="card-impact">
+								<h3 class="impact-title">Impact</h3>
+								<p class="impact-text">
+									Led 30% of design process, creating high-contrast interfaces
+									and voice navigation optimized for elderly users with
+									cognitive limitations.
+								</p>
+							</div>
+<a href="case-studies/maia-ai-powered-elderly-health-management-app.html">
+							<button class="case-study-btn">
+								Case Study
+								<svg
+									class="arrow-icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor">
+									<path
+										d="M5 12h14M12 5l7 7-7 7"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+							</a>
+						</div>
+					</div>
 
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">Putri</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+					<!-- Add more cards as needed -->
+					<div class="project-card">
+						<div class="card-image">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/offspring_dashboard.png?alt=media"
+								alt="Offspring CRM" />
+						</div>
 
-        <div class="collapse navbar-collapse" id="navbarBasic">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- Add ms-auto class here -->
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="about.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="projects.html">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="art.html">Art</a>
-                </li>
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="code-art.html">Code Art</a>-->
-<!--                </li>-->
-                <li class="navlink nav-link contact-button text-light"><a class="hire"href="mailto:putri@putrinaqibah.com">Hire Me!
-                    <svg class="rocket" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 319.22 319.28">
-                        <defs>
-                            <style>
-                                .cls-1 {
-                                    fill: #fff;
-                                }
-                            </style>
-                        </defs>
-                        <path class="cls-1" d="M319.22,159.85c-.31,10.57-4.98,18.63-14.12,23.94-69.94,40.66-140.71,79.71-215.35,111.29-16.98,7.18-33.79,14.74-50.81,21.83-16.76,6.99-34.76-2.02-38.3-19.47-.99-4.88-.53-10.61,1.02-15.37,12.83-39.3,26.04-78.48,39.25-117.65,1.1-3.25,1.13-6.09,.03-9.35C27.81,116.12,14.77,77.15,1.74,38.17-3.97,21.06,4.81,4.56,21.69,.67c5.89-1.36,11.62-.61,17.2,1.73,71.99,30.12,142.88,62.52,210.61,101.48,18.15,10.44,36.37,20.75,54.58,31.07,9.71,5.5,14.93,13.64,15.14,24.91Zm-255.21,11.82c-.32,.67-.58,1.1-.73,1.57-12.92,38.61-25.86,77.22-38.66,115.88-.49,1.49-.21,4.47,.67,4.93,1.55,.81,4.08,.81,5.78,.11,90.21-36.67,176.79-80.63,260.54-130.24,4.84-2.86,4.86-5.6,.03-8.43C215.25,110.69,137.13,69.31,55.2,35.42c-8.4-3.48-16.7-7.2-25.14-10.57-1.37-.55-3.75-.46-4.71,.4-.95,.85-.79,3.05-.91,4.67-.05,.69,.41,1.42,.65,2.13,11.41,34.13,22.82,68.26,34.24,102.38,1.49,4.44,3.03,8.87,4.55,13.29,21.85,0,43.3,0,64.76,0,7.93,0,13.43,4.92,13.44,11.95,.01,7.03-5.49,11.99-13.4,12-16.97,.02-33.94,0-50.91,0-4.61,0-9.22,0-13.75,0Z"></path>
-                    </svg>
-                </a></li>
-            </ul>
+						<div class="card-content">
+							<div class="card-header">
+								<h2 class="card-title">Offspring Inc CRM</h2>
+								<div class="tech-stack">
+									<!-- PHP -->
+									<span class="tech-icon" title="PHP">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M7.01 10.207h-.944l-.515 2.648h.838c.556 0 .97-.105 1.242-.314.272-.21.455-.559.55-1.049.092-.47.05-.802-.124-.995-.175-.193-.523-.29-1.047-.29zM12 5.688C5.373 5.688 0 8.514 0 12s5.373 6.313 12 6.313S24 15.486 24 12c0-3.486-5.373-6.312-12-6.312zm-3.26 7.451c-.261.25-.575.438-.917.551-.336.108-.765.164-1.285.164H5.357l-.327 1.681H3.652l1.23-6.326h2.65c.797 0 1.378.209 1.744.628.366.418.476 1.002.33 1.752a2.832 2.832 0 0 1-.305.847c-.143.255-.33.49-.561.703zm4.024.715l.543-2.799c.063-.318.039-.536-.068-.651-.107-.116-.336-.174-.687-.174H11.46l-.704 3.625H9.388l1.23-6.327h1.367l-.327 1.682h1.218c.767 0 1.295.134 1.586.401s.378.7.263 1.299l-.572 2.944h-1.389zm7.597-2.265a2.782 2.782 0 0 1-.305.847c-.143.255-.33.49-.561.703a2.44 2.44 0 0 1-.917.551c-.336.108-.765.164-1.286.164h-1.18l-.327 1.682h-1.378l1.23-6.326h2.649c.797 0 1.378.209 1.744.628.366.417.477 1.001.331 1.751zM17.766 10.207h-.943l-.516 2.648h.838c.557 0 .971-.105 1.242-.314.272-.21.455-.559.551-1.049.092-.47.049-.802-.125-.995s-.524-.29-1.047-.29z" />
+										</svg>
+									</span>
+
+									<!-- HTML5 -->
+									<span class="tech-icon" title="HTML5">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+										</svg>
+									</span>
+
+									<!-- CSS3 -->
+									<span class="tech-icon" title="CSS3">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z" />
+										</svg>
+									</span>
+
+									<!-- JavaScript -->
+									<span class="tech-icon" title="JavaScript">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+										</svg>
+									</span>
+
+									<!-- MySQL (optional) -->
+									<span class="tech-icon" title="MySQL">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="64"
+											height="64"
+											viewBox="0 0 25.6 25.6">
+											<path
+												d="M179.076 94.886c-3.568-.1-6.336.268-8.656 1.25-.668.27-1.74.27-1.828 1.116.357.355.4.936.713 1.428.535.893 1.473 2.096 2.32 2.72l2.855 2.053c1.74 1.07 3.703 1.695 5.398 2.766.982.625 1.963 1.428 2.945 2.098.5.357.803.938 1.428 1.16v-.135c-.312-.4-.402-.98-.713-1.428l-1.34-1.293c-1.293-1.74-2.9-3.258-4.64-4.506-1.428-.982-4.55-2.32-5.13-3.97l-.088-.1c.98-.1 2.14-.447 3.078-.715 1.518-.4 2.9-.312 4.46-.713l2.143-.625v-.4c-.803-.803-1.383-1.874-2.23-2.632-2.275-1.963-4.775-3.882-7.363-5.488-1.383-.892-3.168-1.473-4.64-2.23-.537-.268-1.428-.402-1.74-.848-.805-.98-1.25-2.275-1.83-3.436l-3.658-7.763c-.803-1.74-1.295-3.48-2.275-5.086-4.596-7.585-9.594-12.18-17.268-16.687-1.65-.937-3.613-1.34-5.7-1.83l-3.346-.18c-.715-.312-1.428-1.16-2.053-1.562-2.543-1.606-9.102-5.086-10.977-.5-1.205 2.9 1.785 5.755 2.8 7.228.76 1.026 1.74 2.186 2.277 3.346.3.758.4 1.562.713 2.365.713 1.963 1.383 4.15 2.32 5.98.5.937 1.025 1.92 1.65 2.767.357.5.982.714 1.115 1.517-.625.893-.668 2.23-1.025 3.347-1.607 5.042-.982 11.288 1.293 15 .715 1.115 2.4 3.57 4.686 2.632 2.008-.803 1.56-3.346 2.14-5.577.135-.535.045-.892.312-1.25v.1l1.83 3.703c1.383 2.186 3.793 4.462 5.8 5.98 1.07.803 1.918 2.187 3.256 2.677v-.135h-.088c-.268-.4-.67-.58-1.027-.892-.803-.803-1.695-1.785-2.32-2.677-1.873-2.498-3.523-5.265-4.996-8.12-.715-1.383-1.34-2.9-1.918-4.283-.27-.536-.27-1.34-.715-1.606-.67.98-1.65 1.83-2.143 3.034-.848 1.918-.936 4.283-1.248 6.737-.18.045-.1 0-.18.1-1.426-.356-1.918-1.83-2.453-3.078-1.338-3.168-1.562-8.254-.402-11.913.312-.937 1.652-3.882 1.117-4.774-.27-.848-1.16-1.338-1.652-2.008-.58-.848-1.203-1.918-1.605-2.855-1.07-2.5-1.605-5.265-2.766-7.764-.537-1.16-1.473-2.365-2.232-3.435-.848-1.205-1.783-2.053-2.453-3.48-.223-.5-.535-1.294-.178-1.83.088-.357.268-.5.623-.58.58-.5 2.232.134 2.812.4 1.65.67 3.033 1.294 4.416 2.23.625.446 1.295 1.294 2.098 1.518h.938c1.428.312 3.033.1 4.37.5 2.365.76 4.506 1.874 6.426 3.08 5.844 3.703 10.664 8.968 13.92 15.26.535 1.026.758 1.963 1.25 3.034.938 2.187 2.098 4.417 3.033 6.56.938 2.097 1.83 4.24 3.168 5.98.67.937 3.346 1.427 4.55 1.918.893.4 2.275.76 3.08 1.25 1.516.937 3.033 2.008 4.46 3.034.713.534 2.945 1.65 3.078 2.54zm-45.5-38.772a7.09 7.09 0 0 0-1.828.223v.1h.088c.357.714.982 1.205 1.428 1.83l1.027 2.142.088-.1c.625-.446.938-1.16.938-2.23-.268-.312-.312-.625-.535-.937-.268-.446-.848-.67-1.206-1.026z"
+												transform="matrix(.390229 0 0 .38781 -46.300037 -16.856717)"
+												fill-rule="evenodd"
+												fill="#FFFFFFFF" />
+										</svg>
+									</span>
+								</div>
+							</div>
+
+							<p class="card-description">
+								Sales dashboard managing RM2M+ inventory across 4 international
+								markets. Reduced manual data entry by 25% and improved tracking
+								accuracy by 15%.
+							</p>
+
+							<div class="card-impact">
+								<h3 class="impact-title">Impact</h3>
+								<p class="impact-text">
+									Streamlined order management for 500+ SKUs across B2B/B2C
+									platforms, enabling real-time visibility into international
+									operations from Vietnam to Russia.
+								</p>
+							</div>
+<a href="case-studies/offspring-inc-crm.html">
+							<button class="case-study-btn">
+								Case Study
+								<svg
+									class="arrow-icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor">
+									<path
+										d="M5 12h14M12 5l7 7-7 7"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+							</a>
+						</div>
+					</div>
+					<div class="project-card">
+						<div class="card-image">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/parfumenchante.png?alt=media"
+								alt="Parfum Enchante" />
+						</div>
+
+						<div class="card-content">
+							<div class="card-header">
+								<h2 class="card-title">Parfum Enchante</h2>
+								<div class="tech-stack">
+									<!-- HTML5 -->
+									<span class="tech-icon" title="HTML5">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+										</svg>
+									</span>
+
+									<!-- CSS3 -->
+									<span class="tech-icon" title="CSS3">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z" />
+										</svg>
+									</span>
+
+									<!-- JavaScript -->
+									<span class="tech-icon" title="JavaScript">
+										<svg viewBox="0 0 24 24" fill="currentColor">
+											<path
+												d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+										</svg>
+									</span>
+								</div>
+							</div>
+
+							<p class="card-description">
+								E-commerce venture generating RM500 profit from RM200 capital in
+								3 months, selling premium fragrances to UNIMAS students. Scaled
+								efficiently using AI-generated product imagery (Midjourney) and
+								descriptions (OpenAI).
+							</p>
+
+							<div class="card-impact">
+								<h3 class="impact-title">Impact</h3>
+								<p class="impact-text">
+									Achieved 250% ROI in 90 days through lean operations and AI
+									automation, validating business model with university market
+									segment.
+								</p>
+							</div>
+<a href="case-studies/parfum-enchante.html">
+							<button class="case-study-btn">
+								Case Study
+								<svg
+									class="arrow-icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor">
+									<path
+										d="M5 12h14M12 5l7 7-7 7"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</button>
+</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section-container" id="about" data-scroll-section>
+			<div class="container">
+				<h2 class="section-title">About Me</h2>
+				<div class="about-me-card-wrapper">
+					<div class="about-me-card">
+						<img
+							src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/1760105303548.jpg?alt=media"
+							alt="About Me" />
+					</div>
+					<div class="about-me-card-content">
+						<div class="about-me-card-header">
+							<h2 class="about-me-card-title">Putri Naqibah Balqis</h2>
+						</div>
+						<p>
+							Hello! My name is Putri Naqibah Balqis I'm a UI/UX designer and
+							frontend developer who bridges design and code to build
+							user-centered digital experiences. From launching an e-commerce
+							venture that achieved 250% ROI to creating a career platform
+							serving 1,000+ UNIMAS students, I thrive at the intersection of
+							design thinking, technical execution, and entrepreneurship.
+						</p>
+						<p>
+							Currently pursuing Software Engineering (GPA: 4.0) while gaining
+							hands-on experience developing full-stack solutions that improve
+							efficiency by 25%+ and solve real-world problems. I'm passionate
+							about accessible design, clean code, and building products that
+							actually work for people.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section-container" id="work" data-scroll-section>
+			<div class="container">
+				<h2 class="section-title">Work Experience</h2>
+				<!-- Horizontal Timeline Container -->
+				<div class="timeline-horizontal" id="timeline">
+    <!-- line behind the dots -->
+    <span class="timeline-line" aria-hidden="true"></span>
+
+    <article class="timeline-item">
+      <div class="timeline-year">2022–2023</div>
+      <span class="timeline-dot" aria-hidden="true"></span>
+
+      <div class="experience-card">
+        <h2 class="job-title">IT Technician
+ (Full-Stack Development Focus)</h2>
+        <div class="company-info">
+          <span class="company-name">OFFSPRING INC SDN. BHD.</span>
+          <span class="separator"> - </span>
+          <span class="location">PETALING JAYA</span>
         </div>
-    </div>
-</nav>
+        <div class="job-duration">DECEMBER 2022 - MARCH 2023</div>
+        <ul class="responsibilities">
+          <li>Managed multi-market e-commerce operations spanning 4 international territories (Vietnam, Indonesia, Bahrain, Russia), maintaining RM2M+ product portfolio and ensuring platform stability across B2B/B2C channels</li>
+          <li>Delivered custom sales operations dashboard utilizing PHP and JavaScript, achieving 25% reduction in manual processing overhead and 15% improvement in inventory accuracy—translating to significant operational cost savings</li>
+          <li>Conducted comprehensive data analysis across 500+ SKU portfolio, identifying optimization opportunities and troubleshooting critical warehouse management system integrations</li>
+        </ul>
+      </div>
+    </article>
 
-<main>
-    <div class="hero">
-        <div class="hero-text">
-            <div><span class="name">Putri Naqibah Balqis</span></div>
-        </div>
-        <div class="container">
-            <div>
-                <span class="job">UI/UX Designer</span>
-                <span class="job star">✦</span>
-                <span class="job">Web Designer</span>
-                <span class="job star">✦</span>
-                <span class="job">Web Developer</span>
-                <span class="job star">✦</span>
-                <span class="job">Graphic Designer</span>
-                <span class="job star">✦</span>
-                <span class="job">IT Technician</span>
-            </div>
-        </div>
-        <div class="container btn-hero-container">
-            <a class="btn-hero-text" href="assets/Putri_Naqibah_Balqis_Binti_Zainol.docx" download>
-                <button class="btn-hero download">
-                    Download Resume
-                </button>
-            </a>
-            <a class="btn-hero-text" href="mailto:putri@putrinaqibah.com">
-                <button class="btn-hero">
-                    Hire me!
-                </button>
-            </a>
-        </div>
+    <article class="timeline-item">
+      <div class="timeline-year">2023–2024</div>
+      <span class="timeline-dot" aria-hidden="true"></span>
 
-        <div class="social-link">
-            <a href="https://www.linkedin.com/in/putri-naqibah-balqis-zainol-85614a1b2/">
-                Linkedin
-            </a>
-            <a href="https://github.com/putrinaqiba">
-                Github
-            </a>
-
+      <div class="experience-card">
+        <h2 class="job-title">UI/UX DESIGNER & FRONTEND DEVELOPER</h2>
+        <div class="company-info">
+          <span class="company-name">TELEBORT SDN. BHD.</span>
+          <span class="separator"> - </span>
+          <span class="location">REMOTE</span>
         </div>
-    </div>
-</main>
-<section id="section1">
+        <div class="job-duration">APRIL 2023 - APRIL 2024</div>
 
-    <div class="about-section-home">
-        <div>
-            Hello my name is Putri Naqibah Balqis!
-        </div>
-        <div>
-            I am an experienced IT professional with a passion for new technology and expertise in IT infrastructure,
-            network management, and troubleshooting. Skilled in programming, UI/UX, and graphic design with a keen eye
-            for detail in a collaborative, fast-paced environment.
+        <ul class="responsibilities">
+          <li>Spearheaded end-to-end design of interactive coding education platform serving 500+ learners, driving 40% improvement in student retention through data-informed UX optimization and accessibility enhancements</li>
+          <li>Engineered instructor content management solution using Webflow CMS and JavaScript, accelerating deployment cycles by 30% and enabling 30+ instructors to scale course delivery efficiently</li>
+          <li>Collaborated with cross-functional stakeholders across design, marketing, and product teams to establish scalable design systems and component libraries, earning Webflow Practitioner certification</li>
+        </ul>
+      </div>
+    </article>
 
-        </div>
-    </div>
-</section>
-<!--
-<section id="section2 d-flex">
-    <div class="featured-work-section">
-        Featured Projects
-    </div>
-    <div class="projects">
-        <div class="project-container flex-container">
-            <div class="project-item">
-                <div class="projects-title">
-                    Offspring Customer Service Dashboard
-                </div>
-                <div class="projects-description">
-                    Created a customer service dashboard with HTML, CSS, JavaScript, PHP. Integrated with the CRM for
-                    real-time updates. Conducted user testing and implemented feedback to enhance functionality and
-                    usability.
-                </div>
-                <div class="projects-tags">
-                    <span class="tags">PHP</span><span class="tags">HTML</span><span class="tags">CSS</span><span
-                        class="tags">Javascript</span><span class="tags">CRM</span><span class="tags">Figma</span>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="projects-image">
-                    <img src="https://cdn.discordapp.com/attachments/1085842557017276429/1091073324362256524/offspring_dashboard.png"
-                         alt="project-2">
-                </div>
+  </div>
+		</section>
+		<div class="container">
+		<section class="section-container section2" id="education" data-scroll-section>
+				<!-- Education Section -->
+			<div class="education-section">
+				<div class="education-heading">Education</div>
+				<div class="education-details-wrapper">
+					<div class="education-details">
+						<div class="education-school-name">
+							<span class="education-title">Bachelor of Software Engineering</span>
+							<span class="education-place">University of Malaysia Sarawak (UNIMAS), Sarawak, Malaysia</span>
+							<span class="education-year">2023 - 2027</span>
+						</div>
+					</div>
+					<div class="education-details">
+						<div class="education-school-name">
+							<span class="education-title">Diploma In Computer Science</span>
+							<span class="education-place">Mara Professional College Beranang, Selangor, Malaysia</span>
+							<span class="education-year">2020 - 2023</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            </div>
-        </div>
-    </div>
-    <div class="project-container flex-container">
-        <div class="project-item">
-            <div class="projects-image">
-                <img src="https://cdn.discordapp.com/attachments/1085842557017276429/1091109459671126126/image.png"
-                     alt="project-2">
-            </div>
+			<!-- Skills Section -->
+			<div class="skills-section" id="skills">
+				<div class="skills-heading">Skills</div>
+				<div class="skills-details-wrapper">
+					<div class="skills-details">
+						<span class="skills-button">UI/UX</span>
+						<span class="skills-button">Python</span>
+						<span class="skills-button">Firebase</span>
 
-        </div>
-        <div class="project-item">
-            <div class="projects-title">
-                Inventory Management System
-            </div>
-            <div class="projects-description">
-                I developed an inventory management system using C# and Microsoft SQL Server Data Tools. The project
-                implemented Object-Oriented Programming to efficiently store user-entered data. To enhance user
-                experience, I created an interactive graphical user interface using Visual Studio Windows Form App.
-                Figma was also utilized as a tool for wireframing to ensure a visually pleasing and intuitive design.
-            </div>
-            <div class="projects-tags">
-                <span class="tags">C#</span><span class="tags">Figma</span><span class="tags">SQL</span>
-            </div>
-        </div>
-    </div>
+						<span class="skills-button">HTML</span>
+						<span class="skills-button">CSS</span>
+						<span class="skills-button">JavaScript</span>
+						<span class="skills-button">C++</span>
+						<span class="skills-button">C#</span>
+						<span class="skills-button">Java</span>
+						<span class="skills-button">PHP</span>
+						<span class="skills-button">Figma</span>
+						<span class="skills-button">Illustrator</span>
+						<span class="skills-button">Photoshop</span>
+						<span class="skills-button">Networking</span>
+						<span class="skills-button">Computer Repair</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		</div>
+		
 
-</section>
- -->
+		<script src="..\assets\js\script.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+	</body>
+	<footer class="footer" data-scroll-section>
+	<div class="container footer-content">
+		<div class="footer-left">
+			<a href="#" class="footer-brand">Putri</a>
+			<p>&copy; 2024 Putri Naqibah Balqis. All rights reserved.</p>
+		</div>
 
-<script src="assets/js/homepage.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</body>
+		<div class="footer-right">
+			<div class="cta-footer-wrapper">
+				<a href="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/PUTRI_NAQIBAH_BALQIS.pdf?alt=media"><button class="btn-cta">Download Resume</button></a>
+				<a href="mailto:putri@putrinaqibah.com"><button class="btn-cta">Hire Me</button></a>
+				<a href="https://www.linkedin.com/in/putrinaqibah">
+					<button class="btn-cta icon-btn">
+						<svg
+								xmlns="http://www.w3.org/2000/svg"
+								id="Layer_1"
+								data-name="Layer 1"
+								viewBox="0 0 288 232.67">
+								<defs>
+									<style>
+										.cls-1 {
+											fill: #fff;
+											stroke-width: 0px;
+										}
+									</style>
+								</defs>
+								<path
+									class="cls-1"
+									d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" />
+							</svg>
+					</button>
+				</a>
+				<a href="https://github.com/putrinaq">
+					<button class="btn-cta icon-btn">
+						<img src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media" alt="GitHub" class="icon-img" />
+					</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
 </html>

@@ -1,0 +1,1536 @@
+/* ========================================
+   GLOBAL STYLES & FONTS
+======================================== */
+@import url("./fonts.css");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	padding-top: 50px;
+	font-family: "Tronica Mono", monospace;
+	background: black !important;
+	color: white;
+	transition: overflow 0.3s ease;
+	font-smooth: never;
+	-webkit-font-smoothing: none;
+	-moz-osx-font-smoothing: grayscale;
+}
+img,
+canvas,
+svg {
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+a {
+	text-decoration: none !important;
+	color: white !important;
+}
+
+.container {
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.section-title {
+	font-family: "PP Mondwest", serif;
+	font-size: clamp(2rem, 5vw, 4rem);
+	text-align: left;
+	margin-bottom: 2rem;
+	position: relative;
+	color: white;
+}
+
+/* ========================================
+   NAVBAR - BASE (Shared Styles)
+======================================== */
+nav {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1001; /* 1. Nav bar is on top */
+	display: flex;
+	align-items: center;
+	padding: 1rem 2rem;
+	font-family: "PP Mondwest", serif;
+
+	/* Glass effect */
+	background: rgba(0, 0, 0, 0.08); /* Light transparent layer */
+	backdrop-filter: blur(15px) saturate(180%); /* Adds depth + glassiness */
+	-webkit-backdrop-filter: blur(15px) saturate(180%); /* Safari support */
+
+	transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+nav.scrolled {
+	background: rgba(0, 0, 0, 0.5); /* Darker translucent background */
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   NAVBAR - DESKTOP
+======================================== */
+.nav-links {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+	list-style: none;
+	width: 100%;
+	justify-content: center;
+}
+
+.nav-links li a {
+	text-decoration: none;
+	color: white;
+	font-size: 1rem;
+	display: block;
+	padding: 0.5rem;
+	transition: opacity 0.3s ease;
+}
+.nav-links li a:hover {
+	opacity: 0.7;
+}
+
+/* Center Brand (Desktop Only) */
+.brand-desktop {
+	list-style: none;
+	padding: 0 1.5rem;
+}
+.brand-desktop a {
+	font-size: 2rem !important;
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+.brand-desktop a:hover {
+	opacity: 1;
+}
+
+/* Hide mobile brand on desktop */
+.brand {
+	display: none;
+}
+
+/* Hamburger (hidden on desktop) */
+.hamburger {
+	display: none;
+	flex-direction: column;
+	gap: 5px;
+	cursor: pointer;
+	padding: 0.5rem;
+	z-index: 1001;
+}
+.hamburger span {
+	background: white;
+	height: 3px;
+	width: 25px;
+	border-radius: 5px;
+	transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hamburger.active {
+	/* ... */
+	z-index: 1003; /* 4. Hamburger is on top of everything */
+}
+
+/* ========================================
+   HAMBURGER ANIMATION
+======================================== */
+.hamburger.active span:nth-child(1) {
+	transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+	opacity: 0;
+	transform: translateX(-10px);
+}
+.hamburger.active span:nth-child(3) {
+	transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ========================================
+   NAVBAR - MOBILE
+======================================== */
+@media (max-width: 768px) {
+	nav {
+		justify-content: space-between;
+		padding: 1rem 1.5rem;
+	}
+
+	/* Show mobile brand */
+	.brand {
+		display: block;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	/* Hide desktop brand */
+	.brand-desktop {
+		display: none;
+	}
+
+	/* Show hamburger */
+	.hamburger {
+		display: flex;
+	}
+
+	/* Dropdown Menu with Smooth Animation (Mobile) */
+	.nav-links {
+		position: fixed;
+		top: 65px;
+		left: 0;
+		width: 100%;
+		flex-direction: column;
+		gap: 1.5rem;
+		padding: 2rem 0;
+
+		/* GLASS EFFECT */
+		background: rgba(0, 0, 0, 0.938); /* Make it translucent */
+		backdrop-filter: blur(20px) saturate(180%); /* Apply blur */
+		-webkit-backdrop-filter: blur(20px) saturate(180%); /* Safari support */
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+		/* animation base */
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.5s ease, opacity 0.4s ease;
+		z-index: 999; /* make sure it's above content */
+	}
+
+	.nav-links.open {
+		max-height: 500px;
+		opacity: 1;
+		z-index: 1002; /* 3. Menu links sit on top of the overlay */
+
+		/* REMOVE the blur from the menu itself */
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+
+		/* Keep the background color so links are readable */
+		background: rgba(0, 0, 0, 0.638);
+		backdrop-filter: blur(20px) saturate(180%); /* Apply blur */
+	}
+
+	/* Animate individual menu items */
+	.nav-links li {
+		width: 100%;
+		text-align: center;
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: opacity 0.4s ease, transform 0.4s ease;
+	}
+
+	.nav-links.open li {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Staggered animation for each link */
+	.nav-links.open li:nth-child(1) {
+		transition-delay: 0.1s;
+	}
+	.nav-links.open li:nth-child(2) {
+		transition-delay: 0.15s;
+	}
+	.nav-links.open li:nth-child(3) {
+		transition-delay: 0.2s;
+	}
+	.nav-links.open li:nth-child(4) {
+		transition-delay: 0.25s;
+	}
+	.nav-links.open li:nth-child(5) {
+		transition-delay: 0.3s;
+	}
+	.nav-links.open li:nth-child(6) {
+		transition-delay: 0.35s;
+	}
+
+	.nav-links li a {
+		padding: 1rem;
+		width: 100%;
+		font-size: 1.1rem;
+	}
+
+	.nav-links li:last-child a {
+		border-bottom: none;
+	}
+
+	/* Prevent scroll when menu is open */
+	body.menu-open {
+		overflow: hidden;
+	}
+}
+
+/* Optional: Add overlay for better UX */
+.menu-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+
+	/* ... */
+	z-index: 1000; /* 2. Overlay is just below the nav bar */
+
+	/* Use this element to control the page blur */
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+}
+
+.menu-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* ========================================
+   HERO SECTION - BASE
+======================================== */
+.hero-section {
+	position: relative;
+	min-height: 100svh;
+	width: 100%;
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+	isolation: isolate;
+}
+
+/* Wrapper */
+.cta-wrapper {
+	display: flex;
+	gap: 1em;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* Base button style */
+.btn-cta {
+	background-color: #0c0c0c;
+	border: none;
+	border-radius: 50em;
+	padding: 0.5em 1.5em;
+	font-size: 1.2em;
+	font-family: "PP Mondwest", serif;
+	color: white;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 3em;
+	line-height: 1;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+}
+/*  image */
+.icon-img {
+	width: 2.4em; /* Scales with text size */
+	height: 2.4em;
+	object-fit: contain;
+	display: block;
+}
+
+/* Glowing hover effect */
+.btn-cta:hover {
+	background-color: #1a1a1a;
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+		0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1),
+		inset 0 0 20px rgba(255, 255, 255, 0.1);
+	transform: translateY(-2px);
+}
+
+/* Animated glow ring */
+.btn-cta::before {
+	content: "";
+	position: absolute;
+	inset: -100px;
+	border-radius: 50em;
+	background: linear-gradient(
+		45deg,
+		transparent,
+		rgba(82, 82, 82, 0.5),
+		transparent
+	);
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	animation: rotate 3s linear infinite;
+	animation-play-state: paused;
+}
+
+.btn-cta:hover::before {
+	opacity: 1;
+	animation-play-state: running;
+}
+
+/* Inner glow pulse */
+.btn-cta::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50em;
+	background: radial-gradient(
+		circle at center,
+		rgba(255, 255, 255, 0.2) 0%,
+		transparent 70%
+	);
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.btn-cta:hover::after {
+	opacity: 1;
+	animation: pulse 2s ease-in-out infinite;
+}
+
+/* Rotation animation for the border glow */
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Pulse animation for inner glow */
+@keyframes pulse {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 0.5;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 1;
+	}
+}
+
+/* Icon button: make it a perfect circle */
+.icon-btn {
+	width: 3em;
+	padding: 0;
+}
+
+/* SVG inside button - make sure it's above pseudo-elements */
+.btn-cta svg,
+.icon-svg {
+	position: relative;
+	z-index: 1;
+	transition: all 0.4s ease;
+}
+
+.btn-cta:hover svg,
+.btn-cta:hover .icon-svg {
+	filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+	transform: scale(1.05);
+}
+
+/* SVG styling */
+.icon-svg {
+	width: 1.5em;
+	height: auto;
+	fill: white;
+	display: block;
+}
+
+.btn-cta svg {
+	width: 2em;
+	height: 2em;
+	display: block;
+}
+
+/* Button container */
+.cta-buttons {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+}
+
+/* Active/pressed state */
+.btn-cta:active {
+	transform: translateY(0);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
+		inset 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Ensure text is above pseudo-elements */
+.btn-cta {
+	z-index: 1;
+}
+
+.btn-cta > * {
+	position: relative;
+	z-index: 2;
+}
+
+#bg-video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+	pointer-events: none;
+}
+.name {
+	margin-top: 1em;
+	margin-bottom: 0.3em;
+	font-family: "PP Mondwest", serif;
+	font-weight: bold;
+	font-size: clamp(2em, 4em + 2vw, 7em);
+}
+
+.expertise {
+	display: flex;
+	max-width: 74em; /* stays responsive within screen limit */
+	width: 100%;
+	margin-inline: auto; /* centers on page */
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+	gap: 0.625em 1.875em;
+	flex-wrap: wrap;
+}
+
+.hero-section::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 0;
+}
+
+.hero-content {
+	position: relative;
+	text-align: center;
+	z-index: 1;
+	padding: 2rem;
+	color: white;
+}
+
+.hero-content p {
+	font-size: clamp(1rem, 2vw, 1.5rem);
+	font-family: "Tronica Mono", monospace;
+	margin-bottom: 2rem;
+	opacity: 0.9;
+}
+
+.cta-button {
+	padding: 1rem 2rem;
+	border: 2px solid white;
+	background: transparent;
+	color: white;
+	cursor: pointer;
+	font-size: 1rem;
+	font-family: inherit;
+	transition: all 0.3s ease;
+}
+.cta-button:hover {
+	background: white;
+	color: black;
+}
+
+/* ========================================
+   HERO SECTION - MOBILE
+======================================== */
+/* Tablet view */
+@media (max-width: 1024px) {
+	.expertise p {
+		flex: auto;
+	}
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+	.expertise p {
+		flex: auto;
+	}
+
+	.expertise {
+		gap: 0.5em 1em; /* reduce big vertical gap */
+	}
+}
+/* ========================================
+  SECTIONS - BASE
+======================================== */
+
+.section-container {
+	padding: 3rem 0;
+}
+
+/* ========================================
+   PROJECTS SECTION - BASE
+======================================== */
+/* Projects Grid Container */
+.projects-container {
+	max-width: 1400px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Exactly 2 columns */
+	gap: 2rem;
+	align-items: stretch; /* Makes all cards same height */
+	padding: 2rem 0;
+}
+
+/* Card Container */
+.project-card {
+	width: 100%;
+	background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+	border-radius: 16px;
+	overflow: hidden;
+	border: 1px solid #2a2a2a;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+		0 0 0 1px rgba(255, 255, 255, 0.05);
+	flex-direction: column; /* Add this */
+	height: 100%; /* Ensures cards fill grid cell height */
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Image Section */
+.card-image {
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
+	position: relative;
+	flex-shrink: 0; /* Prevents image from shrinking */
+	border-bottom: 2px solid #ffffff;
+}
+
+.card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+
+.project-card:hover .card-image img {
+	transform: scale(1.05);
+}
+
+/* Content Section */
+.card-content {
+	padding: 1.5rem;
+	display: flex; /* Add this */
+	flex-direction: column; /* Add this */
+	min-height: 0; /* Fixes potential overflow issues */
+	flex: 1; /* Add this - makes content fill available space */
+}
+
+/* Header with Title and Tech Stack */
+.card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-title {
+	font-size: 1.1rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	color: #fff;
+	text-transform: uppercase;
+	line-height: 1.3;
+	flex: 1;
+	margin-right: 1rem;
+}
+
+/* Tech Stack Icons */
+.tech-stack {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.tech-icon {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 6px;
+	font-size: 0.7rem;
+	font-weight: 700;
+	color: #fff;
+	transition: all 0.3s ease;
+}
+
+.tech-icon svg {
+	width: 18px;
+	height: 18px;
+}
+
+.tech-text {
+	font-size: 0.65rem;
+}
+
+.tech-icon:hover {
+	background: rgba(0, 212, 255, 0.1);
+	border-color: #ffffff;
+	transform: translateY(-2px);
+}
+
+.card-description {
+	font-size: clamp(0.75rem, 1vw, 0.85rem);
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.7);
+	margin-bottom: 1.25rem;
+	flex-grow: 0; /* Don't let description push button down unnecessarily */
+}
+
+/* Impact Section */
+.card-impact {
+	background: rgba(255, 255, 255, 0.05);
+	border-left: 3px solid #ffffff;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 4px;
+	flex-grow: 0; /* Don't let impact section grow */
+}
+
+.impact-title {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.impact-text {
+	font-size: clamp(0.75rem, 1vw, 0.85rem);
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* Case Study Button */
+.case-study-btn {
+	width: 100%;
+	padding: 0.875rem 1.5rem;
+	background: transparent;
+	border: 2px solid #ffffff;
+	border-radius: 8px;
+	color: #ffffff;
+	font-family: "Tronica Mono", monospace;
+	font-size: 0.875rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	margin-top: auto; /* This pushes the button to the bottom */
+	flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+.case-study-btn::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent
+	);
+	transition: left 0.5s ease;
+}
+
+.case-study-btn:hover::before {
+	left: 100%;
+}
+
+.case-study-btn:hover {
+	background: white;
+	color: #000;
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+	transform: translateY(-2px);
+}
+
+.arrow-icon {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s ease;
+}
+
+.case-study-btn:hover .arrow-icon {
+	transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+	.projects-container {
+		grid-template-columns: 1fr; /* Exactly 1 column on mobile */
+	}
+}
+
+@media (max-width: 768px) {
+	.projects-container {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.card-title {
+		font-size: 0.95rem;
+	}
+
+	.tech-icon {
+		width: 28px;
+		height: 28px;
+	}
+
+	.tech-icon svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.card-header {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.card-title {
+		margin-right: 0;
+	}
+
+	.tech-stack {
+		align-self: flex-start;
+	}
+}
+
+/* ========================================
+   ABOUT ME SECTION - BASE
+======================================== */
+/* Keep text and container responsive */
+.about-me-card-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	gap: 2rem;
+	flex-wrap: wrap; /* allows wrap on smaller screens */
+}
+
+.about-me-card,
+.about-me-card-content {
+	background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+	border-radius: 16px;
+	border: 1px solid #2a2a2a;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+		0 0 0 1px rgba(255, 255, 255, 0.05);
+	padding: 2rem;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	height: clamp(350px, 50vw, 500px); /* height scales responsively */
+}
+
+/* Responsive width using clamp */
+.about-me-card {
+	flex: 1 1 clamp(260px, 40%, 470px);
+	max-width: 470px;
+}
+
+.about-me-card img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 12px;
+}
+
+.about-me-card-content {
+	flex: 1 1 clamp(300px, 55%, 730px);
+	max-width: 730px;
+	overflow-y: hidden; /* text scrollable if needed */
+}
+
+.about-me-card-content p {
+	margin-bottom: 1rem;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	line-height: 1.6;
+}
+
+.about-me-card-header h2 {
+	font-size: clamp(1.5rem, 3vw, 2.2rem);
+	font-weight: bold;
+	font-family: "PP Mondwest", serif;
+	margin-bottom: 1rem;
+	color: white;
+}
+
+/* ✅ Responsive layout for tablets */
+@media (max-width: 1024px) {
+	.about-me-card-wrapper {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.about-me-card,
+	.about-me-card-content {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+/* ✅ Mobile-optimized layout */
+@media (max-width: 600px) {
+	.about-me-card-wrapper {
+		gap: 1.5rem;
+	}
+
+	.about-me-card,
+	.about-me-card-content {
+		padding: 1.5rem;
+	}
+
+	.about-me-card-content p {
+		font-size: clamp(0.9rem, 3vw, 1.1rem);
+	}
+}
+
+/* ========================================
+  WORK EXPERIENCE SECTION - BASE
+======================================== */
+/* Timeline Container */
+
+.timeline {
+	position: relative;
+	padding: 2rem 0;
+}
+/* Timeline Line (goes under the dot) */
+.timeline::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: #333;
+	transform: translateX(-50%);
+	z-index: 1; /* Behind the dot */
+}
+/* Timeline Item */
+.timeline-item {
+	position: relative;
+	margin-bottom: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Timeline Dot (sits above the line) */
+.timeline-dot {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2; /* Above the line */
+	box-shadow: 0 0 0 4px black, 0 0 0 6px #333;
+}
+/* Timeline Year */
+.timeline-year {
+	position: absolute;
+	top: -40px;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.8);
+	letter-spacing: 0.05em;
+}
+
+/* Timeline Content */
+.timeline-content {
+	width: 45%;
+	position: relative;
+}
+
+/* Left Side Content */
+.timeline-content.left {
+	margin-right: auto;
+	padding-right: 3rem;
+	text-align: right;
+}
+
+.timeline-content.left .timeline-year {
+	right: 3rem;
+}
+
+/* Right Side Content */
+.timeline-content.right {
+	margin-left: auto;
+	padding-left: 3rem;
+}
+
+.timeline-content.right .timeline-year {
+	left: 3rem;
+}
+
+/* Experience Card */
+.experience-card {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 2rem;
+	transition: all 0.3s ease;
+	height: 490px;
+}
+
+.experience-card:hover {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-4px);
+}
+
+/* Job Title */
+.job-title {
+	font-size: 1.3rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-family: "PP Mondwest", serif;
+	margin-bottom: 0.5rem;
+	color: #fff;
+	margin-bottom: 1em;
+}
+
+.job-subtitle {
+	font-size: 0.95rem;
+	font-weight: 400;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-bottom: 1rem;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* Company Info */
+.company-info {
+	font-size: 0.85rem;
+	margin-bottom: 0.5rem;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.company-name {
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.location {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.duration-inline {
+	color: rgba(255, 255, 255, 0.6);
+	margin-left: 0.5rem;
+}
+
+.job-duration {
+	font-size: 0.85rem;
+	margin-bottom: 1.5rem;
+	color: rgba(255, 255, 255, 0.6);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+/* Responsibilities List */
+.responsibilities {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.responsibilities li {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.75);
+	margin-bottom: 1rem;
+	padding-left: 1.5rem;
+	position: relative;
+}
+
+/* Left side bullets */
+.timeline-content.left .responsibilities li::before {
+	content: "•";
+	position: absolute;
+	right: 100%;
+	margin-right: 0.5rem;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 1.2rem;
+}
+
+/* Right side bullets */
+.timeline-content.right .responsibilities li::before {
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 1.2rem;
+}
+
+.timeline-content.right .responsibilities li {
+	padding-left: 1.5rem;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+/* Work Experience Section */
+
+.work-experience {
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 0 2rem;
+	height: fit-content;
+}
+
+/* Section title keeps your style */
+.section-title {
+	margin-bottom: 6rem;
+}
+
+/* Horizontal slider container */
+.timeline-horizontal {
+	position: relative;
+	display: flex;
+	gap: 4rem;
+	padding: 4rem 0 2rem 0;
+	overflow-x: auto;
+	overflow-y: visible;
+	scroll-behavior: smooth;
+	cursor: grab;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+/* hide scrollbar (WebKit + Firefox + Edge) */
+.timeline-horizontal::-webkit-scrollbar {
+	height: 0;
+}
+.timeline-horizontal {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+.timeline-horizontal::-webkit-scrollbar-thumb {
+	background: transparent;
+}
+
+/* line behind dots */
+.timeline-line {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: #fff; /* keep your color scheme */
+	opacity: 1;
+	z-index: 0; /* behind dots */
+}
+
+/* items */
+.timeline-item {
+	position: relative;
+	flex: 0 0 500px; /* card width in slider */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	animation: slideInRight 0.8s ease forwards;
+	opacity: 0;
+}
+
+/* stagger (optional) */
+.timeline-item:nth-child(1) {
+	animation-delay: 0.1s;
+}
+.timeline-item:nth-child(2) {
+	animation-delay: 0.3s;
+}
+.timeline-item:nth-child(3) {
+	animation-delay: 0.5s;
+}
+
+/* year above dot */
+.timeline-year {
+	position: absolute;
+	top: -45px;
+	font-size: 1.2rem;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.9);
+	letter-spacing: 0.05em;
+	white-space: nowrap;
+	z-index: 2;
+}
+
+/* dot above line */
+.timeline-dot {
+	position: absolute;
+	top: 0;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	z-index: 2; /* above line */
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.timeline-dot.active {
+	background: white;
+	transform: scale(1.4);
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+.timeline-item:hover .timeline-dot {
+	transform: scale(1.3);
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* card keeps your styling; only spacing here */
+.experience-card {
+	margin-top: 60px;
+}
+
+/* bullets/text keep your existing colors/sizes */
+.responsibilities {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.responsibilities li {
+	font-size: 0.8rem;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.75);
+	margin-bottom: 1.25rem;
+	padding-left: 1.5rem;
+	position: relative;
+	text-align: left;
+}
+.responsibilities li::before {
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 1.2rem;
+}
+.responsibilities li:last-child {
+	margin-bottom: 0;
+}
+
+/* Animation */
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* --------- Responsive: switch to vertical stacked on mobile --------- */
+@media (max-width: 768px) {
+	.work-experience {
+		padding: 0.5em 1rem;
+		height: fit-content;
+	}
+	.section-title {
+		font-size: 1.8rem;
+		margin-bottom: 3rem;
+	}
+
+	/* Vertical Progress Fill (mobile only) */
+	.timeline-line::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: var(--progress, 0%);
+		background: #ffffff; /* your dot color */
+		transition: height 0.3s ease-out;
+		z-index: 1;
+	}
+
+	.timeline-horizontal {
+		flex-direction: column;
+		gap: 3rem;
+		padding: 0 0 0 2.25rem; /* room for vertical line/dots */
+		overflow-x: visible;
+		cursor: auto;
+	}
+
+	/* vertical line on mobile */
+	.timeline-line {
+		top: 0;
+		left: 10px;
+		bottom: 0;
+		height: auto;
+		width: 2px;
+	}
+
+	.timeline-item {
+		flex: 1 1 auto;
+		align-items: flex-start;
+		margin: 0;
+	}
+
+	.timeline-year {
+		position: relative;
+		top: 0;
+		left: 0;
+		margin-bottom: 0.75rem;
+		font-size: 1rem;
+		margin-left: 5px;
+	}
+
+	.timeline-dot {
+		top: 0px;
+		left: -32px; /* sits on the vertical line */
+	}
+
+	.experience-card {
+		margin-top: 0.5rem;
+		height: fit-content;
+	}
+}
+
+/* tighter on very small screens */
+@media (max-width: 480px) {
+	.timeline-horizontal {
+		padding-left: 1.5rem;
+	}
+	.timeline-line {
+		left: 8px;
+	}
+	.timeline-dot {
+		left: -20px;
+	}
+	.work-experience {
+		padding: 0.5em 1rem;
+		height: fit-content;
+	}
+
+	.experience-card {
+		padding: 1.5rem;
+		height: fit-content;
+	}
+}
+/* ========================================
+   SKILLS AND EDUCATION DESIGN
+======================================== */
+
+.section2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	background-color: black;
+	gap: 40px;
+}
+
+/* Columns */
+.education-section,
+.skills-section {
+	width: 45%;
+	color: white;
+}
+
+/* Headings */
+.education-heading,
+.skills-heading {
+	font-family: "PP Mondwest", serif;
+	font-size: 60px;
+	font-weight: 200;
+	line-height: 1.2;
+	margin-bottom: 20px;
+	color: white;
+	text-shadow: 0 0 15px rgba(119, 207, 255, 0.4);
+	animation: twinkling 6s ease-in-out infinite;
+}
+
+/* Education Items */
+.education-details-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+.education-details {
+	width: 100%;
+	font-size: 1em;
+}
+
+.education-title {
+	display: block;
+	font-family: "PP Mondwest", serif;
+	margin-bottom: 6px;
+	font-size: 1.7em;
+}
+
+.education-place {
+	color: rgba(255, 255, 255, 0.8);
+	display: block;
+	font-size: 1.3em;
+}
+
+.education-year {
+	display: block;
+	margin-top: 5px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+/* Skills */
+.skills-details-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.skills-details {
+	line-height: 3;
+}
+
+.skills-button {
+	font-size: 18px;
+	padding: 10px 18px;
+	background-color: black;
+	color: white;
+	border: 1px solid #ffffff;
+	border-radius: 8px;
+	margin: 5px;
+	transition: 0.3s ease;
+}
+
+.skills-button:hover {
+	background: white;
+	color: black;
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+	.education-section,
+	.skills-section {
+		width: 100%;
+	}
+}
+/* ========================================
+   FOOTER - BASE
+======================================== */
+.footer {
+	padding: 2rem 1.5rem;
+	background: #272727;
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.9rem;
+}
+
+.footer-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
+	flex-wrap: wrap; /* ✅ Allows wrapping on smaller screens */
+}
+
+.footer-left {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.footer-left p {
+	font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.cta-footer-wrapper {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap; /* ✅ Buttons remain tidy on smaller devices */
+	justify-content: center;
+}
+
+.brand-desktop a {
+	font-weight: bold;
+	color: white;
+}
+.footer-brand {
+	font-family: "PP Mondwest", serif;
+	font-size: 3rem;
+}
+/* ✅ Mobile Styling */
+@media (max-width: 768px) {
+	.footer-content {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.cta-footer-wrapper {
+		justify-content: center;
+		gap: 0.75rem;
+	}
+}
+/* ================================
+   ✨ Custom Scrollbar Styling
+================================ */
+::-webkit-scrollbar {
+	width: 6px; /* Thin scrollbar */
+	height: 6px; /* For horizontal scrollbars */
+	background: transparent; /* make background transparent */
+	border-radius: 999px; /* rounded edges */
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05); /* subtle track */
+	border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.3); /* glowing thumb */
+	border-radius: 999px;
+	border: 1px solid rgba(0, 0, 0, 0.5); /* creates glass border */
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.5); /* brighter when hovered */
+}
+
+/* Firefox support */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+}
