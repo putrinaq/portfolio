@@ -1,20 +1,20 @@
 {
-<<<<<<< HEAD
   "name": "portfolio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^10.7.2",
     "locomotive-scroll": "^4.1.4"
-=======
-  "dependencies": {
-    "firebase": "^10.7.2"
->>>>>>> 80c364da7f0662a90f0e5b79bbda8b42a866d1c9
+  },
+  "devDependencies": {
+    "vite": "^5.4.19"
   }
 }

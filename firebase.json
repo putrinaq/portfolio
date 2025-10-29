@@ -1,17 +1,10 @@
 {
   "hosting": {
-    "public": "portfolio",
+    "public": "/",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/404.html"
-      }
-    ],
-    "cleanUrls": true
+    ]
   }
 }
