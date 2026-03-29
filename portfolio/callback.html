@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Redirecting...</title>
+	</head>
+	<body>
+		<script>
+			// Pass everything (the ?code=xxx part) through to the app
+			window.location.href = "ritual://callback" + window.location.search;
+		</script>
+		<p>Opening app...</p>
+	</body>
+</html>
