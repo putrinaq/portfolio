@@ -10,7 +10,7 @@
 }
 
 body {
-	padding-top: 50px;
+	padding-top: 0;
 	font-family: "Tronica Mono", monospace;
 	background: black !important;
 	color: white;
@@ -47,249 +47,229 @@ a {
 }
 
 /* ========================================
-   NAVBAR - BASE (Shared Styles)
+   NAVBAR
 ======================================== */
 nav {
 	position: fixed;
 	top: 0;
-	width: 100%;
-	z-index: 1001; /* 1. Nav bar is on top */
+	left: 0;
+	right: 0;
+	z-index: 1001;
 	display: flex;
 	align-items: center;
-	padding: 1rem 2rem;
+	justify-content: space-between;
+	padding: 1.2rem 2.5rem;
 	font-family: "PP Mondwest", serif;
-
-	/* Glass effect */
-	background: rgba(0, 0, 0, 0.08); /* Light transparent layer */
-	backdrop-filter: blur(15px) saturate(180%); /* Adds depth + glassiness */
-	-webkit-backdrop-filter: blur(15px) saturate(180%); /* Safari support */
-
-	transition: background 0.3s ease, backdrop-filter 0.3s ease;
+	background: transparent;
+	transition: background 0.4s ease, padding 0.4s ease;
 }
 
 nav.scrolled {
-	background: rgba(0, 0, 0, 0.5); /* Darker translucent background */
+	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(20px) saturate(180%);
 	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+	padding: 0.9rem 2.5rem;
 }
 
-/* ========================================
-   NAVBAR - DESKTOP
-======================================== */
+/* Brand */
+.brand {
+	font-size: 1rem;
+	letter-spacing: 0.18em;
+	color: white;
+	text-decoration: none;
+	flex-shrink: 0;
+	z-index: 1004;
+}
+
+/* ── Desktop nav links ── */
 .nav-links {
 	display: flex;
-	gap: 2rem;
-	align-items: center;
+	gap: 2.5rem;
 	list-style: none;
-	width: 100%;
-	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .nav-links li a {
+	font-size: 0.75rem;
+	letter-spacing: 0.14em;
+	color: rgba(255, 255, 255, 0.7);
 	text-decoration: none;
-	color: white;
-	font-size: 1rem;
+	position: relative;
+	padding-bottom: 3px;
+	transition: color 0.3s ease;
+}
+
+.nav-links li a::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background: white;
+	transition: width 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.nav-links li a:hover { color: white; }
+.nav-links li a:hover::after { width: 100%; }
+
+/* Available dot */
+.nav-avail {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.7rem;
+	letter-spacing: 0.1em;
+	color: rgba(255, 255, 255, 0.55);
+	flex-shrink: 0;
+}
+
+.avail-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #4ade80;
 	display: block;
-	padding: 0.5rem;
-	transition: opacity 0.3s ease;
-}
-.nav-links li a:hover {
-	opacity: 0.7;
+	animation: dotPulse 2s ease infinite;
 }
 
-/* Center Brand (Desktop Only) */
-.brand-desktop {
-	list-style: none;
-	padding: 0 1.5rem;
-}
-.brand-desktop a {
-	font-size: 2rem !important;
-	font-weight: bold;
-	color: white;
-	text-decoration: none;
-}
-.brand-desktop a:hover {
-	opacity: 1;
+@keyframes dotPulse {
+	0%, 100% { opacity: 1;   transform: scale(1);   }
+	50%       { opacity: 0.4; transform: scale(0.65); }
 }
 
-/* Hide mobile brand on desktop */
-.brand {
-	display: none;
-}
-
-/* Hamburger (hidden on desktop) */
+/* ── Hamburger — hidden on desktop ── */
 .hamburger {
 	display: none;
 	flex-direction: column;
+	justify-content: center;
 	gap: 5px;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	background: none;
+	border: none;
 	cursor: pointer;
-	padding: 0.5rem;
-	z-index: 1001;
+	z-index: 1004;
+	flex-shrink: 0;
 }
+
 .hamburger span {
+	display: block;
+	width: 22px;
+	height: 1.5px;
 	background: white;
-	height: 3px;
-	width: 25px;
-	border-radius: 5px;
-	transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	border-radius: 2px;
+	transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1),
+				opacity  0.42s ease;
+	transform-origin: center;
 }
 
-.hamburger.active {
-	/* ... */
-	z-index: 1003; /* 4. Hamburger is on top of everything */
-}
-
-/* ========================================
-   HAMBURGER ANIMATION
-======================================== */
-.hamburger.active span:nth-child(1) {
-	transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) {
-	opacity: 0;
-	transform: translateX(-10px);
-}
-.hamburger.active span:nth-child(3) {
-	transform: rotate(-45deg) translate(7px, -6px);
-}
+.hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* ========================================
-   NAVBAR - MOBILE
+   NAVBAR — MOBILE
 ======================================== */
 @media (max-width: 768px) {
 	nav {
-		justify-content: space-between;
-		padding: 1rem 1.5rem;
+		padding: 1rem 1.4rem;
+		/* always slightly dark on mobile so brand is always readable */
+		background: rgba(0, 0, 0, 0.45);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
 	}
 
-	/* Show mobile brand */
-	.brand {
-		display: block;
-		font-size: 1.2rem;
-		font-weight: bold;
+	nav.scrolled {
+		padding: 0.8rem 1.4rem;
+		background: rgba(0, 0, 0, 0.7);
 	}
 
-	/* Hide desktop brand */
-	.brand-desktop {
-		display: none;
-	}
+	.nav-avail { display: none; }
+	.hamburger  { display: flex; }
 
-	/* Show hamburger */
-	.hamburger {
-		display: flex;
-	}
-
-	/* Dropdown Menu with Smooth Animation (Mobile) */
+	/* ── Full-screen overlay menu ──
+	   backdrop-filter + clip-path on the SAME element cancel each other.
+	   Use opacity/visibility instead — backdrop-filter works fine with those. */
 	.nav-links {
 		position: fixed;
-		top: 65px;
-		left: 0;
+		inset: 0;
 		width: 100%;
+		height: 100dvh;
+
+		/* reset desktop absolute centering */
+		left: 0;
+		transform: none;
+
 		flex-direction: column;
-		gap: 1.5rem;
-		padding: 2rem 0;
+		justify-content: center;
+		align-items: center;
+		gap: 0;
 
-		/* GLASS EFFECT */
-		background: rgba(0, 0, 0, 0.938); /* Make it translucent */
-		backdrop-filter: blur(20px) saturate(180%); /* Apply blur */
-		-webkit-backdrop-filter: blur(20px) saturate(180%); /* Safari support */
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		/* Frosted glass */
+		background: rgba(8, 8, 8, 0.75);
+		backdrop-filter: blur(28px) saturate(180%);
+		-webkit-backdrop-filter: blur(28px) saturate(180%);
 
-		/* animation base */
-		max-height: 0;
-		overflow: hidden;
+		/* hidden via opacity — does NOT break backdrop-filter */
 		opacity: 0;
-		transition: max-height 0.5s ease, opacity 0.4s ease;
-		z-index: 999; /* make sure it's above content */
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.4s ease, visibility 0.4s ease;
+		z-index: 1002;
 	}
 
 	.nav-links.open {
-		max-height: 500px;
 		opacity: 1;
-		z-index: 1002; /* 3. Menu links sit on top of the overlay */
-
-		/* REMOVE the blur from the menu itself */
-		backdrop-filter: none;
-		-webkit-backdrop-filter: none;
-
-		/* Keep the background color so links are readable */
-		background: rgba(0, 0, 0, 0.638);
-		backdrop-filter: blur(20px) saturate(180%); /* Apply blur */
+		visibility: visible;
+		pointer-events: auto;
 	}
 
-	/* Animate individual menu items */
+	/* Large tap-friendly links */
 	.nav-links li {
 		width: 100%;
 		text-align: center;
 		opacity: 0;
-		transform: translateY(-20px);
+		transform: translateY(16px);
 		transition: opacity 0.4s ease, transform 0.4s ease;
 	}
 
-	.nav-links.open li {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	/* Staggered animation for each link */
-	.nav-links.open li:nth-child(1) {
-		transition-delay: 0.1s;
-	}
-	.nav-links.open li:nth-child(2) {
-		transition-delay: 0.15s;
-	}
-	.nav-links.open li:nth-child(3) {
-		transition-delay: 0.2s;
-	}
-	.nav-links.open li:nth-child(4) {
-		transition-delay: 0.25s;
-	}
-	.nav-links.open li:nth-child(5) {
-		transition-delay: 0.3s;
-	}
-	.nav-links.open li:nth-child(6) {
-		transition-delay: 0.35s;
-	}
+	.nav-links.open li             { opacity: 1; transform: translateY(0); }
+	.nav-links.open li:nth-child(1){ transition-delay: 0.18s; }
+	.nav-links.open li:nth-child(2){ transition-delay: 0.24s; }
+	.nav-links.open li:nth-child(3){ transition-delay: 0.30s; }
+	.nav-links.open li:nth-child(4){ transition-delay: 0.36s; }
+	.nav-links.open li:nth-child(5){ transition-delay: 0.42s; }
 
 	.nav-links li a {
-		padding: 1rem;
-		width: 100%;
-		font-size: 1.1rem;
+		display: block;
+		padding: 1.1rem 2rem;
+		font-size: 1.7rem;
+		letter-spacing: 0.06em;
+		color: rgba(255, 255, 255, 0.9);
 	}
 
-	.nav-links li:last-child a {
-		border-bottom: none;
-	}
+	.nav-links li a::after { display: none; }
 
-	/* Prevent scroll when menu is open */
-	body.menu-open {
-		overflow: hidden;
-	}
+	body.menu-open { overflow: hidden; }
 }
 
-/* Optional: Add overlay for better UX */
-.menu-overlay {
+/* Overlay backdrop */
+.overlay {
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 999;
+	inset: 0;
+	z-index: 1000;
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.4s ease, visibility 0.4s ease;
-
-	/* ... */
-	z-index: 1000; /* 2. Overlay is just below the nav bar */
-
-	/* Use this element to control the page blur */
-	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
 }
 
-.menu-overlay.active {
+.overlay.active {
 	opacity: 1;
 	visibility: visible;
 }
@@ -348,8 +328,10 @@ nav.scrolled {
 /* Glowing hover effect */
 .btn-cta:hover {
 	background-color: #1a1a1a;
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
-		0 0 40px rgba(255, 255, 255, 0.2), 0 0 60px rgba(255, 255, 255, 0.1),
+	box-shadow:
+		0 0 20px rgba(255, 255, 255, 0.3),
+		0 0 40px rgba(255, 255, 255, 0.2),
+		0 0 60px rgba(255, 255, 255, 0.1),
 		inset 0 0 20px rgba(255, 255, 255, 0.1);
 	transform: translateY(-2px);
 }
@@ -465,7 +447,8 @@ nav.scrolled {
 /* Active/pressed state */
 .btn-cta:active {
 	transform: translateY(0);
-	box-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
+	box-shadow:
+		0 0 10px rgba(255, 255, 255, 0.2),
 		inset 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
@@ -595,18 +578,23 @@ nav.scrolled {
 	border-radius: 16px;
 	overflow: hidden;
 	border: 1px solid #2a2a2a;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+	box-shadow:
+		0 10px 40px rgba(0, 0, 0, 0.5),
 		0 0 0 1px rgba(255, 255, 255, 0.05);
 	flex-direction: column; /* Add this */
 	height: auto; /* Ensures cards fill grid cell height */
 	display: flex;
 	flex-direction: column;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	transition:
+		transform 0.3s ease,
+		box-shadow 0.3s ease;
 }
 
 .project-card:hover {
 	transform: translateY(-8px);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+	box-shadow:
+		0 20px 60px rgba(0, 0, 0, 0.7),
+		0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .card-image {
@@ -636,6 +624,7 @@ nav.scrolled {
 	flex-direction: column; /* Add this */
 	min-height: 0; /* Fixes potential overflow issues */
 	flex: 1; /* Add this - makes content fill available space */
+	justify-content: space-between;
 }
 
 /* Header with Title and Tech Stack */
@@ -840,518 +829,319 @@ nav.scrolled {
 }
 
 /* ========================================
-   ABOUT ME SECTION - BASE
+   ABOUT ME SECTION
 ======================================== */
-/* Keep text and container responsive */
-.about-me-card-wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: stretch;
-	gap: 2rem;
-	flex-wrap: wrap; /* allows wrap on smaller screens */
+.about-grid {
+	display: grid;
+	grid-template-columns: 42% 1fr;
+	gap: 5rem;
+	align-items: start;
 }
 
-.about-me-card,
-.about-me-card-content {
-	background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-	border-radius: 16px;
-	border: 1px solid #2a2a2a;
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
-		0 0 0 1px rgba(255, 255, 255, 0.05);
-	padding: 2rem;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	height: clamp(350px, 50vw, 500px); /* height scales responsively */
+/* ── Image column ── */
+.about-image-wrap {
+	position: relative;
+	overflow: hidden;
+	border-radius: 4px;
+	aspect-ratio: 3 / 4;
 }
 
-/* Responsive width using clamp */
-.about-me-card {
-	flex: 1 1 clamp(260px, 40%, 470px);
-	max-width: 470px;
-}
-
-.about-me-card img {
+.about-image {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	border-radius: 12px;
+	display: block;
+	filter: grayscale(15%);
+	transition:
+		filter 0.6s ease,
+		transform 0.6s ease;
 }
 
-.about-me-card-content {
-	flex: 1 1 clamp(300px, 55%, 730px);
-	max-width: 730px;
-	overflow-y: hidden; /* text scrollable if needed */
+.about-image-wrap:hover .about-image {
+	filter: grayscale(0%);
+	transform: scale(1.03);
 }
 
-.about-me-card-content p {
-	margin-bottom: 1rem;
-	color: rgba(255, 255, 255, 0.7);
-	font-size: clamp(1rem, 2vw, 1.2rem);
-	line-height: 1.6;
+/* Caption overlay at bottom of image */
+.about-image-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1.5rem 1.2rem 1.2rem;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 
-.about-me-card-header h2 {
-	font-size: clamp(1.5rem, 3vw, 2.2rem);
-	font-weight: bold;
+.about-image-name {
 	font-family: "PP Mondwest", serif;
-	margin-bottom: 1rem;
+	font-size: 0.65rem;
+	letter-spacing: 0.12em;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.about-image-loc {
+	font-size: 0.6rem;
+	letter-spacing: 0.1em;
+	color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Content column ── */
+.about-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1.8rem;
+	padding-top: 0.5rem;
+}
+
+.about-role-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.role-tag {
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 999px;
+	padding: 0.3em 0.9em;
+	font-size: 0.68rem;
+	letter-spacing: 0.08em;
+	color: rgba(255, 255, 255, 0.55);
+	transition:
+		border-color 0.3s ease,
+		color 0.3s ease;
+}
+
+.role-tag:hover {
+	border-color: rgba(255, 255, 255, 0.5);
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.about-bio {
+	color: rgba(255, 255, 255, 0.65);
+	font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+	line-height: 1.75;
+	margin: 0;
+}
+
+.about-divider {
+	width: 100%;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Stats row ── */
+.about-stats {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+}
+
+.stat-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.stat-number {
+	font-family: "PP Mondwest", serif;
+	font-size: clamp(1.8rem, 3vw, 2.6rem);
 	color: white;
+	line-height: 1;
+	margin: 0;
 }
 
-/* ✅ Responsive layout for tablets */
+.stat-label {
+	font-size: 0.65rem;
+	letter-spacing: 0.1em;
+	color: rgba(255, 255, 255, 0.4);
+	text-transform: uppercase;
+	margin: 0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-	.about-me-card-wrapper {
-		flex-direction: column;
-		align-items: center;
+	.about-grid {
+		grid-template-columns: 1fr;
+		gap: 3rem;
 	}
 
-	.about-me-card,
-	.about-me-card-content {
-		max-width: 100%;
-		height: auto;
+	.about-image-wrap {
+		aspect-ratio: 4 / 3;
+		max-width: 600px;
+	}
+
+	.about-stats {
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
 
-/* ✅ Mobile-optimized layout */
 @media (max-width: 600px) {
-	.about-me-card-wrapper {
+	.about-grid {
+		gap: 2rem;
+	}
+
+	.about-stats {
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1.5rem;
 	}
 
-	.about-me-card,
-	.about-me-card-content {
-		padding: 1.5rem;
-	}
-
-	.about-me-card-content p {
-		font-size: clamp(0.9rem, 3vw, 1.1rem);
+	.about-image-wrap {
+		aspect-ratio: 1 / 1;
 	}
 }
 
 /* ========================================
-  WORK EXPERIENCE SECTION - BASE
+   WORK EXPERIENCE — ACCORDION LIST
 ======================================== */
-/* Timeline Container */
 
-.timeline {
-	position: relative;
-	padding: 2rem 0;
+.work-list {
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-/* Timeline Line (goes under the dot) */
-.timeline::before {
-	content: "";
-	position: absolute;
-	left: 50%;
-	top: 0;
-	bottom: 0;
-	width: 2px;
-	background: #333;
-	transform: translateX(-50%);
-	z-index: 1; /* Behind the dot */
+
+.work-item {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-/* Timeline Item */
-.timeline-item {
-	position: relative;
-	margin-bottom: 6rem;
-	display: flex;
+
+/* ── Collapsed header row ── */
+.work-header {
+	display: grid;
+	grid-template-columns: 3rem 1fr max-content 2rem;
 	align-items: center;
-	justify-content: center;
+	gap: 2rem;
+	width: 100%;
+	padding: 1.6rem 0;
+	background: none;
+	border: none;
+	color: white;
+	text-align: left;
+	cursor: pointer;
+	transition: opacity 0.25s ease;
 }
 
-/* Timeline Dot (sits above the line) */
-.timeline-dot {
-	position: absolute;
-	left: 50%;
-	top: 0;
-	width: 20px;
-	height: 20px;
-	background: white;
-	border-radius: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 2; /* Above the line */
-	box-shadow: 0 0 0 4px black, 0 0 0 6px #333;
-}
-/* Timeline Year */
-.timeline-year {
-	position: absolute;
-	top: -40px;
-	font-size: 1.1rem;
-	font-weight: 700;
-	color: rgba(255, 255, 255, 0.8);
-	letter-spacing: 0.05em;
+.work-header:hover {
+	opacity: 0.75;
 }
 
-/* Timeline Content */
-.timeline-content {
-	width: 45%;
-	position: relative;
-}
-
-/* Left Side Content */
-.timeline-content.left {
-	margin-right: auto;
-	padding-right: 3rem;
-	text-align: right;
-}
-
-.timeline-content.left .timeline-year {
-	right: 3rem;
-}
-
-/* Right Side Content */
-.timeline-content.right {
-	margin-left: auto;
-	padding-left: 3rem;
-}
-
-.timeline-content.right .timeline-year {
-	left: 3rem;
-}
-
-/* Experience Card */
-.experience-card {
-	background: rgba(255, 255, 255, 0.02);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	padding: 2rem;
-	transition: all 0.3s ease;
-	height: 490px;
-}
-
-.experience-card:hover {
-	background: rgba(255, 255, 255, 0.05);
-	border-color: rgba(255, 255, 255, 0.2);
-	transform: translateY(-4px);
-}
-
-/* Job Title */
-.job-title {
-	font-size: 1.3rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
+.work-num {
 	font-family: "PP Mondwest", serif;
-	margin-bottom: 0.5rem;
-	color: #fff;
-	margin-bottom: 1em;
+	font-size: 0.7rem;
+	letter-spacing: 0.12em;
+	color: rgba(255, 255, 255, 0.35);
 }
 
-.job-subtitle {
-	font-size: 0.95rem;
-	font-weight: 400;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	margin-bottom: 1rem;
-	color: rgba(255, 255, 255, 0.7);
-}
-
-/* Company Info */
-.company-info {
-	font-size: 0.85rem;
-	margin-bottom: 0.5rem;
-	color: rgba(255, 255, 255, 0.6);
-}
-
-.company-name {
-	font-weight: 700;
-	color: rgba(255, 255, 255, 0.8);
-}
-
-.location {
-	color: rgba(255, 255, 255, 0.6);
-}
-
-.duration-inline {
-	color: rgba(255, 255, 255, 0.6);
-	margin-left: 0.5rem;
-}
-
-.job-duration {
-	font-size: 0.85rem;
-	margin-bottom: 1.5rem;
-	color: rgba(255, 255, 255, 0.6);
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-}
-
-/* Responsibilities List */
-.responsibilities {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.responsibilities li {
-	font-size: 1rem;
-	line-height: 1.7;
-	color: rgba(255, 255, 255, 0.75);
-	margin-bottom: 1rem;
-	padding-left: 1.5rem;
-	position: relative;
-}
-
-/* Left side bullets */
-.timeline-content.left .responsibilities li::before {
-	content: "•";
-	position: absolute;
-	right: 100%;
-	margin-right: 0.5rem;
-	color: rgba(255, 255, 255, 0.5);
-	font-size: 1.2rem;
-}
-
-/* Right side bullets */
-.timeline-content.right .responsibilities li::before {
-	content: "•";
-	position: absolute;
-	left: 0;
-	color: rgba(255, 255, 255, 0.5);
-	font-size: 1.2rem;
-}
-
-.timeline-content.right .responsibilities li {
-	padding-left: 1.5rem;
-}
-
-/* ========================================
-   RESPONSIVE DESIGN
-======================================== */
-/* Work Experience Section */
-
-.work-experience {
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 0 2rem;
-	height: fit-content;
-}
-
-/* Section title keeps your style */
-.section-title {
-	margin-bottom: 6rem;
-}
-
-/* Horizontal slider container */
-.timeline-horizontal {
-	position: relative;
-	display: flex;
-	gap: 4rem;
-	padding: 4rem 0 2rem 0;
-	overflow-x: auto;
-	overflow-y: visible;
-	scroll-behavior: smooth;
-	cursor: grab;
-	justify-content: center;
-	align-items: flex-start;
-}
-
-/* hide scrollbar (WebKit + Firefox + Edge) */
-.timeline-horizontal::-webkit-scrollbar {
-	height: 0;
-}
-.timeline-horizontal {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-}
-.timeline-horizontal::-webkit-scrollbar-thumb {
-	background: transparent;
-}
-
-/* line behind dots */
-.timeline-line {
-	position: absolute;
-	top: 60px;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: #fff; /* keep your color scheme */
-	opacity: 1;
-	z-index: 0; /* behind dots */
-}
-
-/* items */
-.timeline-item {
-	position: relative;
-	flex: 0 0 500px; /* card width in slider */
+.work-info {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	animation: slideInRight 0.8s ease forwards;
-	opacity: 0;
+	gap: 0.2rem;
 }
 
-/* stagger (optional) */
-.timeline-item:nth-child(1) {
-	animation-delay: 0.1s;
-}
-.timeline-item:nth-child(2) {
-	animation-delay: 0.3s;
-}
-.timeline-item:nth-child(3) {
-	animation-delay: 0.5s;
+.work-title {
+	font-family: "PP Mondwest", serif;
+	font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+	letter-spacing: 0.04em;
+	color: white;
 }
 
-/* year above dot */
-.timeline-year {
-	position: absolute;
-	top: -45px;
-	font-size: 1.2rem;
-	font-weight: 400;
-	color: rgba(255, 255, 255, 0.9);
-	letter-spacing: 0.05em;
+.work-company {
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	color: rgba(255, 255, 255, 0.4);
+}
+
+.work-date {
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	color: rgba(255, 255, 255, 0.4);
 	white-space: nowrap;
-	z-index: 2;
 }
 
-/* dot above line */
-.timeline-dot {
-	position: absolute;
-	top: 0;
-	width: 20px;
-	height: 20px;
-	background: #fff;
-	border-radius: 50%;
-	z-index: 2; /* above line */
-	transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+.work-toggle {
+	font-size: 1.3rem;
+	font-weight: 300;
+	color: rgba(255, 255, 255, 0.5);
+	justify-self: end;
+	transition:
+		transform 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+		color 0.3s ease;
+	line-height: 1;
 }
 
-.timeline-dot.active {
-	background: white;
-	transform: scale(1.4);
-	box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-.timeline-item:hover .timeline-dot {
-	transform: scale(1.3);
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+.work-item.is-open .work-toggle {
+	transform: rotate(45deg);
+	color: white;
 }
 
-/* card keeps your styling; only spacing here */
-.experience-card {
-	margin-top: 60px;
+/* ── Expandable body — grid trick for smooth height ── */
+.work-body {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.55s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* bullets/text keep your existing colors/sizes */
-.responsibilities {
+.work-item.is-open .work-body {
+	grid-template-rows: 1fr;
+}
+
+.work-body-inner {
+	overflow: hidden;
+	padding-left: 5rem;
+}
+
+/* inner padding revealed when open */
+.work-item.is-open .work-body-inner {
+	padding-bottom: 2rem;
+}
+
+.work-duration-line {
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	color: rgba(255, 255, 255, 0.35);
+	margin-bottom: 1.2rem;
+	text-transform: uppercase;
+}
+
+.work-responsibilities {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.85rem;
 }
-.responsibilities li {
-	font-size: 0.8rem;
-	line-height: 1.6;
-	color: rgba(255, 255, 255, 0.75);
-	margin-bottom: 1.25rem;
-	padding-left: 1.5rem;
+
+.work-responsibilities li {
+	font-size: 0.88rem;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.65);
+	padding-left: 1.2rem;
 	position: relative;
-	text-align: left;
 }
-.responsibilities li::before {
-	content: "•";
+
+.work-responsibilities li::before {
+	content: "—";
 	position: absolute;
 	left: 0;
-	color: rgba(255, 255, 255, 0.5);
-	font-size: 1.2rem;
-}
-.responsibilities li:last-child {
-	margin-bottom: 0;
+	color: rgba(255, 255, 255, 0.25);
+	font-size: 0.75rem;
 }
 
-/* Animation */
-@keyframes slideInRight {
-	from {
-		opacity: 0;
-		transform: translateX(-50px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-/* --------- Responsive: switch to vertical stacked on mobile --------- */
+/* ── Responsive ── */
 @media (max-width: 768px) {
-	.work-experience {
-		padding: 0.5em 1rem;
-		height: fit-content;
-	}
-	.section-title {
-		font-size: 1.8rem;
-		margin-bottom: 3rem;
+	.work-header {
+		grid-template-columns: 2.2rem 1fr 1.8rem;
+		gap: 1rem;
+		padding: 1.3rem 0;
 	}
 
-	/* Vertical Progress Fill (mobile only) */
-	.timeline-line::after {
-		content: "";
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: var(--progress, 0%);
-		background: #ffffff; /* your dot color */
-		transition: height 0.3s ease-out;
-		z-index: 1;
+	.work-date {
+		display: none;
 	}
 
-	.timeline-horizontal {
-		flex-direction: column;
-		gap: 3rem;
-		padding: 0 0 0 2.25rem; /* room for vertical line/dots */
-		overflow-x: visible;
-		cursor: auto;
-	}
-
-	/* vertical line on mobile */
-	.timeline-line {
-		top: 0;
-		left: 10px;
-		bottom: 0;
-		height: auto;
-		width: 2px;
-	}
-
-	.timeline-item {
-		flex: 1 1 auto;
-		align-items: flex-start;
-		margin: 0;
-	}
-
-	.timeline-year {
-		position: relative;
-		top: 0;
-		left: 0;
-		margin-bottom: 0.75rem;
-		font-size: 1rem;
-		margin-left: 5px;
-	}
-
-	.timeline-dot {
-		top: 0px;
-		left: -32px; /* sits on the vertical line */
-	}
-
-	.experience-card {
-		margin-top: 0.5rem;
-		height: fit-content;
-	}
-}
-
-/* tighter on very small screens */
-@media (max-width: 480px) {
-	.timeline-horizontal {
-		padding-left: 1.5rem;
-	}
-	.timeline-line {
-		left: 8px;
-	}
-	.timeline-dot {
-		left: -20px;
-	}
-	.work-experience {
-		padding: 0.5em 1rem;
-		height: fit-content;
-	}
-
-	.experience-card {
-		padding: 1.5rem;
-		height: fit-content;
+	.work-body-inner {
+		padding-left: 3.2rem;
 	}
 }
 /* ========================================
@@ -1540,4 +1330,312 @@ nav.scrolled {
 * {
 	scrollbar-width: thin;
 	scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   CUSTOM CURSOR
+======================================== */
+@media (pointer: fine) {
+	*,
+	*::before,
+	*::after {
+		cursor: none !important;
+	}
+
+	.cursor-dot {
+		width: 6px;
+		height: 6px;
+		background: white;
+		border-radius: 50%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		z-index: 99999;
+		transform: translate(-50%, -50%);
+		transition: opacity 0.3s ease;
+		will-change: left, top;
+	}
+
+	.cursor-ring {
+		width: 32px;
+		height: 32px;
+		border: 1.5px solid rgba(255, 255, 255, 0.8);
+		border-radius: 50%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		z-index: 99998;
+		transform: translate(-50%, -50%);
+		transition:
+			width 0.3s ease,
+			height 0.3s ease,
+			border-color 0.3s ease,
+			opacity 0.3s ease;
+		will-change: left, top;
+	}
+
+	.cursor-ring.cursor-hover {
+		width: 54px;
+		height: 54px;
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+}
+
+/* ========================================
+   SCROLL REVEAL ANIMATIONS
+======================================== */
+.reveal {
+	opacity: 0;
+	transition:
+		opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+		transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+		filter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	filter: blur(6px);
+	will-change: opacity, transform, filter;
+}
+
+.reveal.reveal--up {
+	transform: translateY(55px);
+}
+
+.reveal.reveal--left {
+	transform: translateX(-55px);
+}
+
+.reveal.reveal--right {
+	transform: translateX(55px);
+}
+
+.reveal.reveal--scale {
+	transform: scale(0.82);
+	filter: blur(3px);
+}
+
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
+	filter: blur(0);
+}
+
+/* Skills buttons get a shorter duration since there are many */
+.skills-button.reveal {
+	transition:
+		opacity 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+		transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+		filter 0.45s ease;
+}
+
+/* Education rows */
+.education-details.reveal {
+	transition:
+		opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+		transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+		filter 0.65s ease;
+}
+
+/* ========================================
+   KINETIC TYPOGRAPHY — SECTION TITLES
+======================================== */
+
+/* Clip container — hides the word-inner until it slides up */
+.word-outer {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: bottom;
+	/* small padding so descenders (g, y, p) don't get clipped */
+	padding-bottom: 0.08em;
+	margin-bottom: -0.08em;
+}
+
+/* Space characters keep their natural width */
+.char-space {
+	white-space: pre;
+}
+
+/* The word itself, starts offscreen below the clip */
+.word-inner {
+	display: inline-block;
+	transform: translateY(115%) skewY(6deg);
+	transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+	will-change: transform;
+}
+
+/* When section enters view, all word-inners slide into place */
+.title-visible .word-inner {
+	transform: translateY(0) skewY(0deg);
+}
+
+/* ========================================
+   FILM GRAIN OVERLAY
+======================================== */
+.grain {
+	position: fixed;
+	inset: -50%;
+	width: 200%;
+	height: 200%;
+	pointer-events: none;
+	z-index: 9990;
+	opacity: 0.042;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-repeat: repeat;
+	animation: grainShift 0.4s steps(1) infinite;
+}
+
+@keyframes grainShift {
+	0% {
+		transform: translate(0, 0);
+	}
+	10% {
+		transform: translate(-4%, -8%);
+	}
+	20% {
+		transform: translate(-12%, 4%);
+	}
+	30% {
+		transform: translate(6%, -20%);
+	}
+	40% {
+		transform: translate(-4%, 20%);
+	}
+	50% {
+		transform: translate(-12%, 8%);
+	}
+	60% {
+		transform: translate(12%, 0%);
+	}
+	70% {
+		transform: translate(0%, 12%);
+	}
+	80% {
+		transform: translate(2%, 28%);
+	}
+	90% {
+		transform: translate(-8%, 8%);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+/* ========================================
+   SCROLL PROGRESS BAR
+======================================== */
+.scroll-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 2px;
+	width: 0%;
+	background: white;
+	z-index: 99999;
+	pointer-events: none;
+	transform-origin: left;
+}
+
+/* ========================================
+   HERO ENTRANCE ANIMATIONS
+======================================== */
+@keyframes heroFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(44px);
+		filter: blur(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0);
+	}
+}
+
+.name {
+	animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation-delay: 0.2s;
+}
+
+.expertise {
+	animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation-delay: 0.5s;
+}
+
+.cta-wrapper {
+	animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation-delay: 0.8s;
+}
+
+/* ========================================
+   MARQUEE TICKER
+======================================== */
+.marquee-strip {
+	overflow: hidden;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	padding: 1.1rem 0;
+	white-space: nowrap;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.marquee-track {
+	display: inline-flex;
+	align-items: center;
+	gap: 2.5rem;
+	animation: marqueeScroll 28s linear infinite;
+	will-change: transform;
+}
+
+.marquee-track span {
+	font-family: "PP Mondwest", serif;
+	font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+	letter-spacing: 0.12em;
+	color: rgba(255, 255, 255, 0.55);
+}
+
+.marquee-sep {
+	color: rgba(255, 255, 255, 0.25) !important;
+	font-size: 0.6rem !important;
+}
+
+@keyframes marqueeScroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+.marquee-strip:hover .marquee-track {
+	animation-play-state: paused;
+}
+
+/* ========================================
+   3D CARD TILT
+======================================== */
+.projects-container {
+	perspective: 1200px;
+}
+
+.project-card {
+	transform-style: preserve-3d;
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.3s ease;
+}
+
+/* Tilt transform is handled by JS — CSS hover is intentionally unset here */
+.project-card:hover {
+	box-shadow:
+		0 20px 60px rgba(0, 0, 0, 0.7),
+		0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   MAGNETIC BUTTON — visual reset
+======================================== */
+/* Magnetic movement is applied inline via JS;
+   transition is set/removed by JS on enter/leave */
+.btn-cta {
+	transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }

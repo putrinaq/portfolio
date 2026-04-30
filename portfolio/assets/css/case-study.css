@@ -13,8 +13,8 @@
 	--cs-card-grad-top: #1a1a1a;
 	--cs-card-grad-bot: #0a0a0a;
 	--cs-glow: rgba(255, 255, 255, 0.4);
-	--cs-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
-		0 0 0 1px rgba(255, 255, 255, 0.05);
+	--cs-shadow:
+		0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
 	--cs-ring: 0 0 15px rgba(255, 255, 255, 0.4);
 	--cs-accent: #ffffff; /* keep white accent for your theme */
 	--cs-gap: clamp(1rem, 2vw, 2rem);
@@ -75,7 +75,9 @@ body {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .case-hero-btn:hover {
-	box-shadow: 0 0 25px rgba(119, 207, 255, 0.5), 0 12px 30px rgba(0, 0, 0, 0.35);
+	box-shadow:
+		0 0 25px rgba(119, 207, 255, 0.5),
+		0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .case-hero::before {
@@ -447,7 +449,9 @@ body {
 	gap: 0.75rem;
 	padding: 0.6rem 0;
 	color: var(--cs-fg) !important;
-	transition: transform 0.2s ease, text-shadow 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		text-shadow 0.2s ease;
 }
 .sidebar-link:first-of-type {
 	border-top: 0;
@@ -471,7 +475,6 @@ body {
 
 html,
 body {
-	height: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -486,6 +489,7 @@ body {
    BOTTOM NAV (Prev / All / Next)
 ======================================== */
 .case-navigation {
+	display: flex;
 	margin-top: 2.5rem;
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
@@ -507,7 +511,9 @@ body {
 	text-decoration: none !important;
 	color: var(--cs-fg) !important;
 	box-shadow: var(--cs-shadow);
-	transition: transform 0.25s ease, box-shadow 0.25s ease,
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease,
 		border-color 0.25s ease;
 }
 .nav-link.center {
@@ -517,7 +523,9 @@ body {
 .nav-link:hover {
 	transform: translateY(-2px);
 	border-color: var(--cs-border-strong);
-	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+	box-shadow:
+		0 20px 60px rgba(0, 0, 0, 0.7),
+		0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 .nav-direction {
 	font-family: "Tronica Mono", monospace;
