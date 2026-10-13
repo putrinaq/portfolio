@@ -1,12 +1,15 @@
 /* ========================================
    GLOBAL STYLES & FONTS
 ======================================== */
-@import url("./fonts.css");
-
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+html {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -14,10 +17,57 @@ body {
 	font-family: "Tronica Mono", monospace;
 	background: black !important;
 	color: white;
-	transition: overflow 0.3s ease;
-	font-smooth: never;
 	-webkit-font-smoothing: none;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Controls respond instantly on touch and don't select their label on long-press */
+a,
+button {
+	touch-action: manipulation;
+}
+
+button,
+.btn-cta,
+.case-study-btn,
+.skills-button {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+:focus-visible {
+	outline: 2px solid rgba(119, 207, 255, 0.85);
+	outline-offset: 3px;
+}
+
+.skip-link {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 100000;
+	padding: 0.6rem 1rem;
+	background: white;
+	color: black !important;
+	font-size: 0.8rem;
+	border-radius: 6px;
+	transform: translateY(-200%);
+	transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+	transform: none;
+}
+
+h1,
+h2,
+h3,
+.work-title {
+	text-wrap: balance;
+}
+
+p,
+li {
+	text-wrap: pretty;
 }
 img,
 canvas,
@@ -116,11 +166,25 @@ nav.scrolled {
 	transition: width 0.35s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.nav-links li a:hover {
-	color: white;
+@media (hover: hover) and (pointer: fine) {
+	.nav-links li a:hover {
+		color: white;
+	}
+	.nav-links li a:hover::after {
+		width: 100%;
+	}
 }
-.nav-links li a:hover::after {
-	width: 100%;
+
+/* Tighten links between tablet and small desktop so they don't collide with the brand */
+@media (min-width: 769px) and (max-width: 1080px) {
+	nav,
+	nav.scrolled {
+		padding-left: 1.6rem;
+		padding-right: 1.6rem;
+	}
+	.nav-links {
+		gap: 1.4rem;
+	}
 }
 
 /* Available dot */
@@ -160,9 +224,11 @@ nav.scrolled {
 	display: none;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	gap: 5px;
-	width: 36px;
-	height: 36px;
+	width: 44px;
+	height: 44px;
+	margin-right: -8px;
 	padding: 0;
 	background: none;
 	border: none;
@@ -200,6 +266,7 @@ nav.scrolled {
 @media (max-width: 768px) {
 	nav {
 		padding: 1rem 1.4rem;
+		padding-top: calc(1rem + env(safe-area-inset-top, 0px));
 		/* always slightly dark on mobile so brand is always readable */
 		background: rgba(0, 0, 0, 0.45);
 		backdrop-filter: blur(16px);
@@ -208,6 +275,7 @@ nav.scrolled {
 
 	nav.scrolled {
 		padding: 0.8rem 1.4rem;
+		padding-top: calc(0.8rem + env(safe-area-inset-top, 0px));
 		background: rgba(0, 0, 0, 0.7);
 	}
 
@@ -372,14 +440,32 @@ nav.scrolled {
 	display: block;
 }
 
-/* Glowing hover effect */
-.btn-cta:hover {
-	background-color: #1a1a1a;
-	box-shadow:
-		0 0 20px rgba(255, 255, 255, 0.3),
-		0 0 40px rgba(255, 255, 255, 0.2),
-		0 0 60px rgba(255, 255, 255, 0.1),
-		inset 0 0 20px rgba(255, 255, 255, 0.1);
+/* Glowing hover effect — mouse only, so it doesn't stick after a tap */
+@media (hover: hover) and (pointer: fine) {
+	.btn-cta:hover {
+		background-color: #1a1a1a;
+		box-shadow:
+			0 0 20px rgba(255, 255, 255, 0.3),
+			0 0 40px rgba(255, 255, 255, 0.2),
+			0 0 60px rgba(255, 255, 255, 0.1),
+			inset 0 0 20px rgba(255, 255, 255, 0.1);
+	}
+
+	.btn-cta:hover::before {
+		opacity: 1;
+		animation-play-state: running;
+	}
+
+	.btn-cta:hover::after {
+		opacity: 1;
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	.btn-cta:hover svg,
+	.btn-cta:hover .icon-svg {
+		filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+		transform: scale(1.05);
+	}
 }
 
 /* Animated glow ring */
@@ -400,11 +486,6 @@ nav.scrolled {
 	animation-play-state: paused;
 }
 
-.btn-cta:hover::before {
-	opacity: 1;
-	animation-play-state: running;
-}
-
 /* Inner glow pulse */
 .btn-cta::after {
 	content: "";
@@ -418,11 +499,6 @@ nav.scrolled {
 	);
 	opacity: 0;
 	transition: opacity 0.4s ease;
-}
-
-.btn-cta:hover::after {
-	opacity: 1;
-	animation: pulse 2s ease-in-out infinite;
 }
 
 /* Rotation animation for the border glow */
@@ -459,13 +535,9 @@ nav.scrolled {
 .icon-svg {
 	position: relative;
 	z-index: 1;
-	transition: all 0.4s ease;
-}
-
-.btn-cta:hover svg,
-.btn-cta:hover .icon-svg {
-	filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
-	transform: scale(1.05);
+	transition:
+		transform 0.4s ease,
+		filter 0.4s ease;
 }
 
 /* SVG styling */
@@ -492,7 +564,7 @@ nav.scrolled {
 
 /* Active/pressed state */
 .btn-cta:active {
-	transform: translateY(0);
+	background-color: #1a1a1a;
 	box-shadow:
 		0 0 10px rgba(255, 255, 255, 0.2),
 		inset 0 0 20px rgba(255, 255, 255, 0.15);
@@ -522,7 +594,8 @@ nav.scrolled {
 	margin-bottom: 0.3em;
 	font-family: "PP Mondwest", serif;
 	font-weight: bold;
-	font-size: clamp(2em, 4em + 2vw, 7em);
+	font-size: clamp(2.6rem, 5vw + 1.5rem, 7rem);
+	line-height: 1.05;
 }
 
 .expertise {
@@ -580,8 +653,13 @@ nav.scrolled {
 ======================================== */
 /* Tablet view */
 @media (max-width: 1024px) {
+	.expertise {
+		margin-bottom: 1.5rem;
+	}
+
 	.expertise p {
 		flex: auto;
+		margin-bottom: 0.75rem;
 	}
 }
 
@@ -593,6 +671,20 @@ nav.scrolled {
 
 	.expertise {
 		gap: 0.5em 1em; /* reduce big vertical gap */
+		margin-bottom: 1.75rem;
+	}
+
+	.expertise p {
+		margin-bottom: 0;
+		font-size: 0.95rem;
+	}
+
+	.hero-content {
+		padding: 6rem 1.25rem 2rem;
+	}
+
+	.btn-cta {
+		font-size: 1rem;
 	}
 }
 /* ========================================
@@ -627,20 +719,9 @@ nav.scrolled {
 	box-shadow:
 		0 10px 40px rgba(0, 0, 0, 0.5),
 		0 0 0 1px rgba(255, 255, 255, 0.05);
-	flex-direction: column; /* Add this */
 	height: auto; /* Ensures cards fill grid cell height */
 	display: flex;
 	flex-direction: column;
-	transition:
-		transform 0.3s ease,
-		box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-	transform: translateY(-8px);
-	box-shadow:
-		0 20px 60px rgba(0, 0, 0, 0.7),
-		0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .card-image {
@@ -659,8 +740,10 @@ nav.scrolled {
 	transition: transform 0.5s ease;
 }
 
-.project-card:hover .card-image img {
-	transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+	.project-card:hover .card-image img {
+		transform: scale(1.05);
+	}
 }
 
 /* Content Section */
@@ -714,7 +797,10 @@ nav.scrolled {
 	font-size: 0.7rem;
 	font-weight: 700;
 	color: #fff;
-	transition: all 0.3s ease;
+	transition:
+		background-color 0.3s ease,
+		border-color 0.3s ease,
+		transform 0.3s ease;
 }
 
 .tech-icon svg {
@@ -726,10 +812,12 @@ nav.scrolled {
 	font-size: 0.65rem;
 }
 
-.tech-icon:hover {
-	background: rgba(0, 212, 255, 0.1);
-	border-color: #ffffff;
-	transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+	.tech-icon:hover {
+		background: rgba(0, 212, 255, 0.1);
+		border-color: #ffffff;
+		transform: translateY(-2px);
+	}
 }
 
 .card-description {
@@ -783,7 +871,11 @@ nav.scrolled {
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
-	transition: all 0.3s ease;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease,
+		box-shadow 0.3s ease,
+		transform 0.3s ease;
 	position: relative;
 	overflow: hidden;
 	margin-top: auto; /* This pushes the button to the bottom */
@@ -793,28 +885,15 @@ nav.scrolled {
 .case-study-btn::before {
 	content: "";
 	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
+	inset: 0;
 	background: linear-gradient(
 		90deg,
 		transparent,
 		rgba(255, 255, 255, 0.2),
 		transparent
 	);
-	transition: left 0.5s ease;
-}
-
-.case-study-btn:hover::before {
-	left: 100%;
-}
-
-.case-study-btn:hover {
-	background: white;
-	color: #000;
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-	transform: translateY(-2px);
+	transform: translateX(-100%);
+	transition: transform 0.5s ease;
 }
 
 .arrow-icon {
@@ -823,14 +902,44 @@ nav.scrolled {
 	transition: transform 0.3s ease;
 }
 
-.case-study-btn:hover .arrow-icon {
-	transform: translateX(4px);
+@media (hover: hover) and (pointer: fine) {
+	.case-study-btn:hover::before {
+		transform: translateX(100%);
+	}
+
+	.case-study-btn:hover {
+		background: white;
+		color: #000 !important;
+		box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+		transform: translateY(-2px);
+	}
+
+	.case-study-btn:hover .arrow-icon {
+		transform: translateX(4px);
+	}
+}
+
+.case-study-btn:active {
+	background: white;
+	color: #000 !important;
+	transform: scale(0.98);
+	transition-duration: 0.12s;
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
 	.projects-container {
-		grid-template-columns: 1fr; /* Exactly 1 column on mobile */
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+	.projects-container {
+		gap: 1.5rem;
+	}
+
+	.card-content {
+		padding: 1.25rem;
 	}
 }
 
@@ -903,9 +1012,11 @@ nav.scrolled {
 		transform 0.6s ease;
 }
 
-.about-image-wrap:hover .about-image {
-	filter: grayscale(0%);
-	transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+	.about-image-wrap:hover .about-image {
+		filter: grayscale(0%);
+		transform: scale(1.03);
+	}
 }
 
 /* Caption overlay at bottom of image */
@@ -960,12 +1071,15 @@ nav.scrolled {
 		color 0.3s ease;
 }
 
-.role-tag:hover {
-	border-color: rgba(255, 255, 255, 0.5);
-	color: rgba(255, 255, 255, 0.9);
+@media (hover: hover) and (pointer: fine) {
+	.role-tag:hover {
+		border-color: rgba(255, 255, 255, 0.5);
+		color: rgba(255, 255, 255, 0.9);
+	}
 }
 
 .about-bio {
+	max-width: 65ch;
 	color: rgba(255, 255, 255, 0.65);
 	font-size: clamp(0.95rem, 1.4vw, 1.05rem);
 	line-height: 1.75;
@@ -1067,8 +1181,10 @@ nav.scrolled {
 	transition: opacity 0.25s ease;
 }
 
-.work-header:hover {
-	opacity: 0.75;
+@media (hover: hover) and (pointer: fine) {
+	.work-header:hover {
+		opacity: 0.75;
+	}
 }
 
 .work-num {
@@ -1190,23 +1306,27 @@ nav.scrolled {
 		padding-left: 3.2rem;
 	}
 }
+
+@media (max-width: 480px) {
+	.work-body-inner {
+		padding-left: 0;
+	}
+
+	.work-responsibilities li {
+		font-size: 0.85rem;
+	}
+}
 /* ========================================
    SKILLS AND EDUCATION DESIGN
 ======================================== */
 
 .section2 {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	flex-wrap: wrap;
 	background-color: black;
-	gap: 40px;
 }
 
-/* Columns */
 .education-section,
 .skills-section {
-	width: 45%;
+	width: 100%;
 	color: white;
 }
 
@@ -1214,38 +1334,38 @@ nav.scrolled {
 .education-heading,
 .skills-heading {
 	font-family: "PP Mondwest", serif;
-	font-size: 60px;
+	font-size: clamp(2.25rem, 5vw, 3.75rem);
 	font-weight: 200;
 	line-height: 1.2;
-	margin-bottom: 20px;
+	margin-bottom: 1.5rem;
 	color: white;
 	text-shadow: 0 0 15px rgba(119, 207, 255, 0.4);
-	animation: twinkling 6s ease-in-out infinite;
 }
 
-/* Education Items */
+/* Education Items — side by side on wide screens */
 .education-details-wrapper {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 30px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+	gap: 2rem 3rem;
 }
 
 .education-details {
-	width: 100%;
 	font-size: 1em;
+	padding-top: 1.25rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .education-title {
 	display: block;
 	font-family: "PP Mondwest", serif;
 	margin-bottom: 6px;
-	font-size: 1.7em;
+	font-size: clamp(1.3rem, 2.4vw, 1.7rem);
 }
 
 .education-place {
 	color: rgba(255, 255, 255, 0.8);
 	display: block;
-	font-size: 1.3em;
+	font-size: clamp(1rem, 1.6vw, 1.3rem);
 }
 
 .education-year {
@@ -1256,15 +1376,25 @@ nav.scrolled {
 
 /* Skills */
 .skills-details-wrapper {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+	gap: 24px 40px;
 }
 
 .skills-details {
 	line-height: 3;
 }
 
+.skills-group-label {
+	display: block;
+	line-height: 1.2;
+	margin: 0 0 4px 5px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
 .skills-button {
+	display: inline-block;
+	line-height: 1.2;
 	font-size: 18px;
 	padding: 10px 18px;
 	background-color: black;
@@ -1272,28 +1402,35 @@ nav.scrolled {
 	border: 1px solid #ffffff;
 	border-radius: 8px;
 	margin: 5px;
-	transition: 0.3s ease;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease,
+		box-shadow 0.3s ease;
 }
 
-.skills-button:hover {
-	background: white;
-	color: black;
-	box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+@media (hover: hover) and (pointer: fine) {
+	.skills-button:hover {
+		background: white;
+		color: black;
+		box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+	}
 }
 
-/* Mobile Responsive */
-@media (max-width: 900px) {
-	.education-section,
-	.skills-section {
-		width: 100%;
+@media (max-width: 600px) {
+	.skills-button {
+		font-size: 15px;
+		padding: 8px 14px;
+		margin: 4px;
 	}
 }
 /* ========================================
    FOOTER - BASE
 ======================================== */
 .footer {
-	padding: 2rem 1.5rem;
-	background: #272727;
+	padding: 2.5rem 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+	margin-top: 3rem;
+	background: #0b0b0b;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
 	color: rgba(255, 255, 255, 0.6);
 	font-size: 0.9rem;
 }
@@ -1314,6 +1451,11 @@ nav.scrolled {
 
 .footer-left p {
 	font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+.footer .btn-cta {
+	background-color: #161616;
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .cta-footer-wrapper {
@@ -1398,9 +1540,9 @@ nav.scrolled {
 		left: 0;
 		pointer-events: none;
 		z-index: 99999;
-		transform: translate(-50%, -50%);
+		margin: -3px 0 0 -3px;
 		transition: opacity 0.3s ease;
-		will-change: left, top;
+		will-change: transform;
 	}
 
 	.cursor-ring {
@@ -1413,19 +1555,56 @@ nav.scrolled {
 		left: 0;
 		pointer-events: none;
 		z-index: 99998;
-		transform: translate(-50%, -50%);
 		transition:
 			width 0.3s ease,
 			height 0.3s ease,
+			margin 0.3s ease,
 			border-color 0.3s ease,
 			opacity 0.3s ease;
-		will-change: left, top;
+		margin: -16px 0 0 -16px;
+		will-change: transform;
 	}
 
 	.cursor-ring.cursor-hover {
 		width: 54px;
 		height: 54px;
+		margin: -27px 0 0 -27px;
 		border-color: rgba(255, 255, 255, 0.4);
+	}
+}
+
+/* Touch devices: no custom cursor */
+@media not (pointer: fine) {
+	.cursor-dot,
+	.cursor-ring {
+		display: none;
+	}
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.reveal,
+	.word-inner {
+		opacity: 1 !important;
+		transform: none !important;
+		filter: none !important;
+	}
+
+	.grain,
+	.marquee-track {
+		animation: none !important;
 	}
 }
 
@@ -1439,7 +1618,6 @@ nav.scrolled {
 		transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
 		filter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	filter: blur(6px);
-	will-change: opacity, transform, filter;
 }
 
 .reveal.reveal--up {
@@ -1470,7 +1648,10 @@ nav.scrolled {
 	transition:
 		opacity 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
 		transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-		filter 0.45s ease;
+		filter 0.45s ease,
+		background-color 0.3s ease,
+		color 0.3s ease,
+		box-shadow 0.3s ease;
 }
 
 /* Education rows */
@@ -1573,11 +1754,12 @@ nav.scrolled {
 	top: 0;
 	left: 0;
 	height: 2px;
-	width: 0%;
+	width: 100%;
 	background: white;
 	z-index: 99999;
 	pointer-events: none;
 	transform-origin: left;
+	transform: scaleX(0);
 }
 
 /* ========================================
@@ -1670,11 +1852,13 @@ nav.scrolled {
 		box-shadow 0.3s ease;
 }
 
-/* Tilt transform is handled by JS — CSS hover is intentionally unset here */
-.project-card:hover {
-	box-shadow:
-		0 20px 60px rgba(0, 0, 0, 0.7),
-		0 0 0 1px rgba(255, 255, 255, 0.1);
+/* Tilt transform is handled by JS — CSS hover only deepens the shadow */
+@media (hover: hover) and (pointer: fine) {
+	.project-card:hover {
+		box-shadow:
+			0 20px 60px rgba(0, 0, 0, 0.7),
+			0 0 0 1px rgba(255, 255, 255, 0.1);
+	}
 }
 
 /* ========================================
@@ -1683,5 +1867,16 @@ nav.scrolled {
 /* Magnetic movement is applied inline via JS;
    transition is set/removed by JS on enter/leave */
 .btn-cta {
-	transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	transition:
+		transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+		background-color 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+		box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Touch press feedback (magnetic transform is mouse-only, so no conflict) */
+@media (hover: none) {
+	.btn-cta:active {
+		transform: scale(0.96);
+		transition-duration: 0.12s;
+	}
 }

@@ -7,7 +7,10 @@
 /* === PP MONDWEST / PP NEUEBIT === */
 @font-face {
 	font-family: "PP Mondwest";
-	src: url("../fonts/PP Mondwest/PPMondwest-Regular.otf") format("opentype");
+	src:
+		url("../fonts/PP Mondwest/PPMondwest-Regular.woff2") format("woff2"),
+		url("../fonts/PP Mondwest/PPMondwest-Regular.otf") format("opentype");
+	font-display: swap;
 }
 
 @font-face {
@@ -29,12 +32,10 @@
 /* === TRONICA MONO === */
 @font-face {
 	font-family: "Tronica Mono";
-	src: url("../fonts/Tronica Mono/Tronica Mono.otf") format("opentype");
-}
-
-@font-face {
-	font-family: "Tronica Mono";
-	src: url("../fonts/Tronica Mono/Tronica Mono.ttf") format("truetype");
+	src:
+		url("../fonts/Tronica Mono/TronicaMono.woff2") format("woff2"),
+		url("../fonts/Tronica Mono/Tronica Mono.otf") format("opentype");
+	font-display: swap;
 }
 
 /* === SF PRO DISPLAY & TEXT === */

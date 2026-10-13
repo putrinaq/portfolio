@@ -2,18 +2,43 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Putri's Portfolio</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Putri Naqibah Balqis — UI/UX Designer & Developer</title>
 		<meta
 			name="description"
-			content="Putri Naqibah Balqis is a highly skilled UI/UX designer..." />
+			content="Portfolio of Putri Naqibah Balqis, a Malaysian UI/UX designer and front-end developer building web platforms, automation tools and accessible interfaces." />
+		<meta name="theme-color" content="#000000" />
+		<meta name="color-scheme" content="dark" />
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:title"
+			content="Putri Naqibah Balqis — UI/UX Designer & Developer" />
+		<meta
+			property="og:description"
+			content="Web platforms, automation tools and accessible interfaces by Putri Naqibah Balqis." />
 
-		<link rel="icon" type="image/x-icon" href="../assets/favicon.png" />
+		<link rel="icon" type="image/png" href="../assets/favicon.png" />
+		<link
+			rel="preload"
+			href="../assets/fonts/PP Mondwest/PPMondwest-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin />
+		<link
+			rel="preload"
+			href="../assets/fonts/Tronica Mono/TronicaMono.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin />
+		<link rel="preconnect" href="https://firebasestorage.googleapis.com" />
 		<link rel="stylesheet" href="../assets/css/fonts.css" />
 		<link rel="stylesheet" href="../assets/css/styles.css" />
 		<link rel="stylesheet" href="../assets/css/locomotive-scroll.css" />
 	</head>
 	<body>
+		<a class="skip-link" href="#projects">Skip to content</a>
 		<nav id="mainNavbar">
 			<a class="brand" href="#">PUTRI</a>
 
@@ -25,11 +50,6 @@
 				<li><a href="#skills">SKILLS</a></li>
 			</ul>
 
-			<div class="nav-avail">
-				<span class="avail-dot"></span>
-				<span class="avail-text">Interning</span>
-			</div>
-
 			<button
 				class="hamburger"
 				id="hamburger"
@@ -40,11 +60,18 @@
 				<span></span>
 			</button>
 		</nav>
-		<div class="scroll-progress"></div>
-		<div class="grain"></div>
-		<div data-scroll-container>
+		<div class="scroll-progress" aria-hidden="true"></div>
+		<div class="grain" aria-hidden="true"></div>
+		<main data-scroll-container>
 			<section class="hero-section" data-scroll-section id="home">
-				<video autoplay muted loop playsinline id="bg-video">
+				<video
+					autoplay
+					muted
+					loop
+					playsinline
+					preload="metadata"
+					aria-hidden="true"
+					id="bg-video">
 					<source
 						src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/2025-10-28%2023-05-26.mp4?alt=media"
 						type="video/mp4" />
@@ -56,53 +83,57 @@
 						<p>Software Developer</p>
 						<p>UI/UX Designer</p>
 						<p>Front-end Developer</p>
-						<p>IT Techinician</p>
+						<p>IT Technician</p>
 						<p>SEO Engineer</p>
 						<p>Data Analyst</p>
 					</div>
 					<div class="cta-wrapper">
 						<a
-							href="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/PUTRI_NAQIBAH_BALQIS.pdf?alt=media">
-							<button class="btn-cta">Download Resume</button>
-						</a>
-						<a href="mailto:putri@putrinaqibah.com">
-							<button class="btn-cta">Hire Me</button>
-						</a>
-						<a href="https://www.linkedin.com/in/putrinaqibah/">
-							<button class="btn-cta icon-btn">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									id="Layer_1"
-									data-name="Layer 1"
-									viewBox="0 0 288 232.67">
-									<defs>
-										<style>
-											.cls-1 {
-												fill: #fff;
-												stroke-width: 0px;
-											}
-										</style>
-									</defs>
-									<path
-										class="cls-1"
-										d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
-									<path
-										class="cls-1"
-										d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
-									<path
-										class="cls-1"
-										d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" />
-								</svg>
-							</button>
-						</a>
-						<a href="https://github.com/putrinaq">
-							<button class="btn-cta icon-btn">
-								<img
-									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media"
-									alt="GitHub"
-									class="icon-img" />
-							</button>
-						</a>
+							class="btn-cta"
+							href="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/PUTRI_NAQIBAH_BALQIS.pdf?alt=media"
+							>Download Resume</a
+						>
+						<a class="btn-cta" href="mailto:putri@putrinaqibah.com">Hire Me</a>
+						<a
+							class="btn-cta icon-btn"
+							href="https://www.linkedin.com/in/putrinaqibah/"
+							target="_blank"
+							rel="noopener"
+							aria-label="LinkedIn">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								id="Layer_1"
+								data-name="Layer 1"
+								viewBox="0 0 288 232.67">
+								<defs>
+									<style>
+										.cls-1 {
+											fill: #fff;
+											stroke-width: 0px;
+										}
+									</style>
+								</defs>
+								<path
+									class="cls-1"
+									d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
+								<path
+									class="cls-1"
+									d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" /></svg
+						></a>
+						<a
+							class="btn-cta icon-btn"
+							href="https://github.com/putrinaq"
+							target="_blank"
+							rel="noopener"
+							aria-label="GitHub">
+							<img
+								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media"
+								alt=""
+								class="icon-img"
+						/></a>
 					</div>
 				</div>
 			</section>
@@ -141,13 +172,15 @@
 						<div class="project-card">
 							<div class="card-image">
 								<img
+									loading="lazy"
+									decoding="async"
 									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/unimas-trace-homepage.png?alt=media"
 									alt="UNIMAS TRACE" />
 							</div>
 
 							<div class="card-content">
 								<div class="card-header">
-									<h2 class="card-title">UNIMAS TRACE</h2>
+									<h3 class="card-title">UNIMAS TRACE</h3>
 									<div class="tech-stack">
 										<!-- Firebase -->
 										<span class="tech-icon" title="Firebase">
@@ -200,23 +233,21 @@
 										with major employers.
 									</p>
 								</div>
-								<br />
-								<a href="case-studies/unimas-trace-career-platform.html">
-									<button class="case-study-btn">
-										Case Study
-										<svg
-											class="arrow-icon"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor">
-											<path
-												d="M5 12h14M12 5l7 7-7 7"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round" />
-										</svg>
-									</button>
-								</a>
+								<a
+									class="case-study-btn"
+									href="case-studies/unimas-trace-career-platform.html">
+									Case Study
+									<svg
+										class="arrow-icon"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor">
+										<path
+											d="M5 12h14M12 5l7 7-7 7"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round" /></svg
+								></a>
 							</div>
 						</div>
 
@@ -224,15 +255,17 @@
 						<div class="project-card">
 							<div class="card-image">
 								<img
+									loading="lazy"
+									decoding="async"
 									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Nothing%20Phone%2C%20PSD.webp?alt=media"
 									alt="MAIA AI Health App" />
 							</div>
 
 							<div class="card-content">
 								<div class="card-header">
-									<h2 class="card-title">
+									<h3 class="card-title">
 										MAIA | AI HEALTH APP FOR THE ELDERLY
-									</h2>
+									</h3>
 									<div class="tech-stack">
 										<span class="tech-icon" title="Figma">
 											<svg viewBox="0 0 24 24" fill="currentColor">
@@ -259,22 +292,20 @@
 									</p>
 								</div>
 								<a
+									class="case-study-btn"
 									href="case-studies/maia-ai-powered-elderly-health-management-app.html">
-									<button class="case-study-btn">
-										Case Study
-										<svg
-											class="arrow-icon"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor">
-											<path
-												d="M5 12h14M12 5l7 7-7 7"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round" />
-										</svg>
-									</button>
-								</a>
+									Case Study
+									<svg
+										class="arrow-icon"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor">
+										<path
+											d="M5 12h14M12 5l7 7-7 7"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round" /></svg
+								></a>
 							</div>
 						</div>
 
@@ -282,13 +313,15 @@
 						<div class="project-card">
 							<div class="card-image">
 								<img
+									loading="lazy"
+									decoding="async"
 									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/offspring_dashboard.png?alt=media"
 									alt="Offspring CRM" />
 							</div>
 
 							<div class="card-content">
 								<div class="card-header">
-									<h2 class="card-title">Offspring Inc CRM</h2>
+									<h3 class="card-title">Offspring Inc CRM</h3>
 									<div class="tech-stack">
 										<!-- PHP -->
 										<span class="tech-icon" title="PHP">
@@ -353,34 +386,35 @@
 										operations from Vietnam to Russia.
 									</p>
 								</div>
-								<a href="case-studies/offspring-inc-crm.html">
-									<button class="case-study-btn">
-										Case Study
-										<svg
-											class="arrow-icon"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor">
-											<path
-												d="M5 12h14M12 5l7 7-7 7"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round" />
-										</svg>
-									</button>
-								</a>
+								<a
+									class="case-study-btn"
+									href="case-studies/offspring-inc-crm.html">
+									Case Study
+									<svg
+										class="arrow-icon"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor">
+										<path
+											d="M5 12h14M12 5l7 7-7 7"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round" /></svg
+								></a>
 							</div>
 						</div>
 						<div class="project-card">
 							<div class="card-image">
 								<img
+									loading="lazy"
+									decoding="async"
 									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/parfumenchante.png?alt=media"
 									alt="Parfum Enchante" />
 							</div>
 
 							<div class="card-content">
 								<div class="card-header">
-									<h2 class="card-title">Parfum Enchante</h2>
+									<h3 class="card-title">Parfum Enchante</h3>
 									<div class="tech-stack">
 										<!-- HTML5 -->
 										<span class="tech-icon" title="HTML5">
@@ -423,22 +457,21 @@
 										segment.
 									</p>
 								</div>
-								<a href="case-studies/parfum-enchante.html">
-									<button class="case-study-btn">
-										Case Study
-										<svg
-											class="arrow-icon"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor">
-											<path
-												d="M5 12h14M12 5l7 7-7 7"
-												stroke-width="2"
-												stroke-linecap="round"
-												stroke-linejoin="round" />
-										</svg>
-									</button>
-								</a>
+								<a
+									class="case-study-btn"
+									href="case-studies/parfum-enchante.html">
+									Case Study
+									<svg
+										class="arrow-icon"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor">
+										<path
+											d="M5 12h14M12 5l7 7-7 7"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round" /></svg
+								></a>
 							</div>
 						</div>
 					</div>
@@ -453,7 +486,9 @@
 							<img
 								src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/1760105303548.jpg?alt=media"
 								alt="Putri Naqibah Balqis"
-								class="about-image" />
+								class="about-image"
+								loading="lazy"
+								decoding="async" />
 							<div class="about-image-overlay">
 								<span class="about-image-name">PUTRI NAQIBAH BALQIS</span>
 								<span class="about-image-loc">MALAYSIA — 2026</span>
@@ -516,35 +551,57 @@
 							<button class="work-header" aria-expanded="true">
 								<span class="work-num">01</span>
 								<span class="work-info">
-									<span class="work-title">IT Technician</span>
+									<span class="work-title"
+										>Digital Experience & Marketing Intern</span
+									>
 									<span class="work-company"
-										>Offspring Inc Sdn. Bhd. · Petaling Jaya</span
+										>U Mobile Sdn. Bhd. · Kuala Lumpur</span
 									>
 								</span>
-								<span class="work-date">2022 – 2023</span>
+								<span class="work-date">2026</span>
 								<span class="work-toggle" aria-hidden="true">+</span>
 							</button>
 							<div class="work-body">
 								<div class="work-body-inner">
 									<p class="work-duration-line">
-										December 2022 – March 2023 · Full-Stack Development Focus
+										February 2026 – August 2026 · Internship
 									</p>
 									<ul class="work-responsibilities">
 										<li>
-											Managed multi-market e-commerce operations across 4
-											international territories (Vietnam, Indonesia, Bahrain,
-											Russia), maintaining a RM2M+ product portfolio across
-											B2B/B2C channels.
+											Developed Python-based automation and validation tools to
+											support large-scale web operations and quality assurance,
+											including automated content, link, and structural checks.
 										</li>
 										<li>
-											Built a custom sales operations dashboard in PHP and
-											JavaScript, cutting manual processing overhead by 25% and
-											improving inventory accuracy by 15%.
+											Built React-based internal reviewer tools to streamline
+											the review and verification of issues identified through
+											automated processes.
 										</li>
 										<li>
-											Analysed a 500+ SKU portfolio to surface optimisation
-											opportunities and resolve warehouse management system
-											integration issues.
+											Utilised Python, React, Playwright, Google Cloud
+											Scheduler, and Power Automate to automate validation and
+											operational workflows.
+										</li>
+										<li>
+											Performed UAT, live-site QA, and multilingual content
+											validation across English, Bahasa Malaysia, and Chinese
+											customer-facing web experiences.
+										</li>
+										<li>
+											Automated a recurring eShop operational workflow, reducing
+											reliance on manual daily processing and incorporating
+											automated completion notifications.
+										</li>
+										<li>
+											Collaborated with cross-functional stakeholders and
+											external development partners to clarify requirements,
+											report and track defects, coordinate releases, and verify
+											fixes before production.
+										</li>
+										<li>
+											Maintained structured UAT defect tracking and technical
+											documentation, supporting requirement traceability and
+											communication throughout ongoing web initiatives.
 										</li>
 									</ul>
 								</div>
@@ -555,6 +612,51 @@
 						<div class="work-item">
 							<button class="work-header" aria-expanded="false">
 								<span class="work-num">02</span>
+								<span class="work-info">
+									<span class="work-title"
+										>Committee Member & Lead Developer, Creative & Design</span
+									>
+									<span class="work-company">UNIMAS TRACE · Sarawak</span>
+								</span>
+								<span class="work-date">2024 – 2025</span>
+								<span class="work-toggle" aria-hidden="true">+</span>
+							</button>
+							<div class="work-body">
+								<div class="work-body-inner">
+									<p class="work-duration-line">
+										March 2024 – July 2025 · Talent Recruitment and Career
+										Exhibition
+									</p>
+									<ul class="work-responsibilities">
+										<li>
+											Built and scaled unimas-trace.com into UNIMAS's premier
+											career platform, achieving the #1 Google ranking for
+											"UNIMAS career fair" and outranking official university
+											pages through strategic SEO.
+										</li>
+										<li>
+											Coordinated recruitment partnerships with major employers
+											including Ernst & Young, Public Bank, and Habib Group,
+											connecting 1,000+ students with career opportunities.
+										</li>
+										<li>
+											Developed the full-stack platform using Firebase,
+											JavaScript, and dynamic content management, sustaining
+											organic traffic growth over a 2-year development cycle.
+										</li>
+										<li>
+											Established TRACE as the recognised career resource brand
+											for UNIMAS students.
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- ── Entry 03 ─────────────────────────────────── -->
+						<div class="work-item">
+							<button class="work-header" aria-expanded="false">
+								<span class="work-num">03</span>
 								<span class="work-info">
 									<span class="work-title"
 										>UI/UX Designer & Frontend Developer</span
@@ -585,6 +687,46 @@
 											Established scalable design systems and component
 											libraries across design, marketing, and product teams.
 											Earned Webflow Practitioner certification.
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- ── Entry 04 ─────────────────────────────────── -->
+						<div class="work-item">
+							<button class="work-header" aria-expanded="false">
+								<span class="work-num">04</span>
+								<span class="work-info">
+									<span class="work-title">IT Technician</span>
+									<span class="work-company"
+										>Offspring Inc Sdn. Bhd. · Petaling Jaya</span
+									>
+								</span>
+								<span class="work-date">2022 – 2023</span>
+								<span class="work-toggle" aria-hidden="true">+</span>
+							</button>
+							<div class="work-body">
+								<div class="work-body-inner">
+									<p class="work-duration-line">
+										December 2022 – March 2023 · Full-Stack Development Focus
+									</p>
+									<ul class="work-responsibilities">
+										<li>
+											Managed multi-market e-commerce operations across 4
+											international territories (Vietnam, Indonesia, Bahrain,
+											Russia), maintaining a RM2M+ product portfolio across
+											B2B/B2C channels.
+										</li>
+										<li>
+											Built a custom sales operations dashboard in PHP and
+											JavaScript, cutting manual processing overhead by 25% and
+											improving inventory accuracy by 15%.
+										</li>
+										<li>
+											Analysed a 500+ SKU portfolio to surface optimisation
+											opportunities and resolve warehouse management system
+											integration issues.
 										</li>
 									</ul>
 								</div>
@@ -630,29 +772,61 @@
 							</div>
 						</div>
 					</div>
+				</section>
 
-					<!-- Skills Section -->
-					<div class="skills-section" id="skills">
-						<div class="skills-heading">Skills</div>
-						<div class="skills-details-wrapper">
-							<div class="skills-details">
-								<span class="skills-button">UI/UX</span>
-								<span class="skills-button">Python</span>
-								<span class="skills-button">Firebase</span>
-
-								<span class="skills-button">HTML</span>
-								<span class="skills-button">CSS</span>
-								<span class="skills-button">JavaScript</span>
-								<span class="skills-button">C++</span>
-								<span class="skills-button">C#</span>
-								<span class="skills-button">Java</span>
-								<span class="skills-button">PHP</span>
-								<span class="skills-button">Figma</span>
-								<span class="skills-button">Illustrator</span>
-								<span class="skills-button">Photoshop</span>
-								<span class="skills-button">Networking</span>
-								<span class="skills-button">Computer Repair</span>
-							</div>
+				<!-- Skills Section -->
+				<section
+					class="section-container skills-section"
+					id="skills"
+					data-scroll-section>
+					<div class="skills-heading">Skills</div>
+					<div class="skills-details-wrapper">
+						<div class="skills-details">
+							<span class="skills-group-label">Development</span>
+							<span class="skills-button">Python</span>
+							<span class="skills-button">JavaScript</span>
+							<span class="skills-button">HTML</span>
+							<span class="skills-button">CSS</span>
+							<span class="skills-button">React</span>
+							<span class="skills-button">PHP</span>
+							<span class="skills-button">Java</span>
+							<span class="skills-button">C++</span>
+							<span class="skills-button">C#</span>
+							<span class="skills-button">Firebase</span>
+							<span class="skills-button">Web Development</span>
+						</div>
+						<div class="skills-details">
+							<span class="skills-group-label">Design</span>
+							<span class="skills-button">UI/UX</span>
+							<span class="skills-button">Figma</span>
+							<span class="skills-button">Illustrator</span>
+							<span class="skills-button">Photoshop</span>
+						</div>
+						<div class="skills-details">
+							<span class="skills-group-label">Testing & QA</span>
+							<span class="skills-button">Playwright</span>
+							<span class="skills-button">Test Automation</span>
+							<span class="skills-button">Quality Assurance</span>
+							<span class="skills-button">User Acceptance Testing</span>
+							<span class="skills-button">Software Testing</span>
+						</div>
+						<div class="skills-details">
+							<span class="skills-group-label">Automation & Tools</span>
+							<span class="skills-button">Process Automation</span>
+							<span class="skills-button">Google Cloud Platform</span>
+							<span class="skills-button">Power Automate</span>
+							<span class="skills-button">Power BI</span>
+							<span class="skills-button">Excel</span>
+						</div>
+						<div class="skills-details">
+							<span class="skills-group-label">IT Support</span>
+							<span class="skills-button">Networking</span>
+							<span class="skills-button">Computer Repair</span>
+						</div>
+						<div class="skills-details">
+							<span class="skills-group-label">Collaboration</span>
+							<span class="skills-button">Stakeholder Management</span>
+							<span class="skills-button">Cross-functional Collaboration</span>
 						</div>
 					</div>
 				</section>
@@ -668,57 +842,65 @@
 					<div class="footer-right">
 						<div class="cta-footer-wrapper">
 							<a
+								class="btn-cta"
 								href="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/PUTRI_NAQIBAH_BALQIS.pdf?alt=media"
-								><button class="btn-cta">Download Resume</button></a
+								>Download Resume</a
 							>
-							<a href="mailto:putri@putrinaqibah.com"
-								><button class="btn-cta">Hire Me</button></a
+							<a class="btn-cta" href="mailto:putri@putrinaqibah.com"
+								>Hire Me</a
 							>
-							<a href="https://www.linkedin.com/in/putrinaqibah">
-								<button class="btn-cta icon-btn">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										id="Layer_1"
-										data-name="Layer 1"
-										viewBox="0 0 288 232.67">
-										<defs>
-											<style>
-												.cls-1 {
-													fill: #fff;
-													stroke-width: 0px;
-												}
-											</style>
-										</defs>
-										<path
-											class="cls-1"
-											d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
-										<path
-											class="cls-1"
-											d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
-										<path
-											class="cls-1"
-											d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" />
-									</svg>
-								</button>
-							</a>
-							<a href="https://github.com/putrinaq">
-								<button class="btn-cta icon-btn">
-									<img
-										src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media"
-										alt="GitHub"
-										class="icon-img" />
-								</button>
-							</a>
+							<a
+								class="btn-cta icon-btn"
+								href="https://www.linkedin.com/in/putrinaqibah"
+								target="_blank"
+								rel="noopener"
+								aria-label="LinkedIn">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									id="Layer_1"
+									data-name="Layer 1"
+									viewBox="0 0 288 232.67">
+									<defs>
+										<style>
+											.cls-1 {
+												fill: #fff;
+												stroke-width: 0px;
+											}
+										</style>
+									</defs>
+									<path
+										class="cls-1"
+										d="M114.59,205.33c-.01-.6-.04-1.21-.04-1.81,0-40.37,0-80.73,0-121.1v-2.09h36.26v11.82h12.06v-11.81h56.49v11.85h12.14v12.32h12.16v100.81h-40.25c-.03-.78-.08-1.57-.08-2.35,0-23.93,0-47.85,0-71.78v-2.58h-12.22v-11.98h-24.18v12.03h-12.07c0,.91,0,1.62,0,2.33,0,24.77-.02,49.54-.03,74.31h-40.25Z" />
+									<path
+										class="cls-1"
+										d="M62.02,205.33c0-25.93.02-51.85.02-77.78,0-14.99,0-29.97,0-44.96v-2.26h40.27c.03.64.09,1.28.09,1.92,0,40.43,0,80.86,0,121.29,0,.6-.09,1.2-.14,1.79h-40.25Z" />
+									<path
+										class="cls-1"
+										d="M70.13,31.79v-12h24.15v11.88h12.03v24.2h-11.9v12.13h-24.26v-11.99h-12v-24.23h11.99Z" /></svg
+							></a>
+							<a
+								class="btn-cta icon-btn"
+								href="https://github.com/putrinaq"
+								target="_blank"
+								rel="noopener"
+								aria-label="GitHub">
+								<img
+									src="https://firebasestorage.googleapis.com/v0/b/portfolio-pnb.firebasestorage.app/o/Icons%2Fgithub.png?alt=media"
+									alt=""
+									class="icon-img"
+							/></a>
 						</div>
 					</div>
 				</div>
 			</footer>
-		</div>
+		</main>
 		<!-- end scroll container -->
 
 		<div class="cursor-dot"></div>
 		<div class="cursor-ring"></div>
-		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-		<script src="./assets/js/script.js"></script>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+		<script defer src="./assets/js/script.js"></script>
 	</body>
 </html>

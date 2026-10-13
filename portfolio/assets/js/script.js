@@ -1,7 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("DOM loaded");
-
 	const navbar = document.getElementById("mainNavbar");
+	const progressBar = document.querySelector(".scroll-progress");
+	const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	function updateScrollUI(y, max) {
+		if (navbar) navbar.classList.toggle("scrolled", y > 50);
+		if (progressBar && max > 0) {
+			progressBar.style.transform = `scaleX(${Math.min(y / max, 1)})`;
+		}
+	}
 
 	// ── Locomotive Scroll ──────────────────────────────────────────────────────
 	const scrollContainer = document.querySelector("[data-scroll-container]");
@@ -10,37 +18,37 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (scrollContainer && typeof LocomotiveScroll !== "undefined") {
 		locomotiveScroll = new LocomotiveScroll({
 			el: scrollContainer,
-			smooth: true,
+			smooth: !reducedMotion,
 			lerp: 0.08,
 			multiplier: 1,
 			smartphone: { smooth: false },
 			tablet: { smooth: false },
 		});
 
-		// Update Locomotive height after all images load
-		window.addEventListener("load", () => {
-			locomotiveScroll.update();
-		});
+		// Locomotive measures the page once; re-measure whenever the content
+		// changes height (web fonts swapping in, lazy images, accordion open/close)
+		// so the scroll limit never leaves empty space below the footer.
+		let updateQueued = false;
+		const refreshScroll = () => {
+			if (updateQueued) return;
+			updateQueued = true;
+			requestAnimationFrame(() => {
+				updateQueued = false;
+				locomotiveScroll.update();
+			});
+		};
 
-		// Also update on any image load inside scroll container
+		if ("ResizeObserver" in window) {
+			new ResizeObserver(refreshScroll).observe(scrollContainer);
+		}
+		window.addEventListener("load", refreshScroll);
+		if (document.fonts) document.fonts.ready.then(refreshScroll);
 		scrollContainer.querySelectorAll("img").forEach((img) => {
-			img.addEventListener("load", () => locomotiveScroll.update());
+			img.addEventListener("load", refreshScroll);
 		});
 
 		locomotiveScroll.on("scroll", ({ scroll, limit }) => {
-			// Navbar shrink on scroll
-			if (scroll.y > 50) {
-				navbar.classList.add("scrolled");
-			} else {
-				navbar.classList.remove("scrolled");
-			}
-
-			// Scroll progress bar
-			const progressBar = document.querySelector(".scroll-progress");
-			if (progressBar && limit.y > 0) {
-				progressBar.style.width = (scroll.y / limit.y) * 100 + "%";
-			}
-
+			updateScrollUI(scroll.y, limit.y);
 			checkAllWatchers();
 		});
 
@@ -64,23 +72,24 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	// ── Fallback native scroll (when Locomotive is disabled on mobile) ─────────
-	window.addEventListener("scroll", () => {
-		if (window.scrollY > 50) {
-			navbar.classList.add("scrolled");
-		} else {
-			navbar.classList.remove("scrolled");
-		}
-
-		const progressBar = document.querySelector(".scroll-progress");
-		if (progressBar) {
-			const max = document.body.scrollHeight - window.innerHeight;
-			if (max > 0) {
-				progressBar.style.width = (window.scrollY / max) * 100 + "%";
-			}
-		}
-
-		checkAllWatchers();
-	});
+	// Coalesced into one update per frame; passive so it never blocks scrolling
+	let scrollTicking = false;
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (scrollTicking) return;
+			scrollTicking = true;
+			requestAnimationFrame(() => {
+				scrollTicking = false;
+				updateScrollUI(
+					window.scrollY,
+					document.documentElement.scrollHeight - window.innerHeight,
+				);
+				checkAllWatchers();
+			});
+		},
+		{ passive: true },
+	);
 
 	// ── Hamburger Menu ─────────────────────────────────────────────────────────
 	const hamburger = document.getElementById("hamburger");
@@ -115,6 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		overlay.addEventListener("click", closeMenu);
 
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape" && navLinks.classList.contains("open")) {
+				closeMenu();
+				hamburger.focus();
+			}
+		});
+
 		// Close menu on nav link click (mobile)
 		navLinks.querySelectorAll("a").forEach((link) => {
 			link.addEventListener("click", closeMenu);
@@ -134,14 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 
 			// Open clicked item if it was closed
+			// (Locomotive re-measures via the ResizeObserver as the height animates)
 			if (!isOpen) {
 				item.classList.add("is-open");
 				header.setAttribute("aria-expanded", "true");
-
-				// Tell Locomotive to recalculate height after accordion expands
-				if (locomotiveScroll) {
-					setTimeout(() => locomotiveScroll.update(), 350);
-				}
 			}
 		});
 	});
@@ -150,26 +162,40 @@ document.addEventListener("DOMContentLoaded", () => {
 	const cursorDot = document.querySelector(".cursor-dot");
 	const cursorRing = document.querySelector(".cursor-ring");
 
-	if (cursorDot && cursorRing) {
+	if (cursorDot && cursorRing && finePointer) {
 		let mouseX = 0,
 			mouseY = 0,
 			ringX = 0,
-			ringY = 0;
+			ringY = 0,
+			ringRunning = false;
 
-		document.addEventListener("mousemove", (e) => {
-			mouseX = e.clientX;
-			mouseY = e.clientY;
-			cursorDot.style.left = mouseX + "px";
-			cursorDot.style.top = mouseY + "px";
-		});
-
-		(function animateCursor() {
+		// transform instead of left/top: compositor-only, no layout per frame
+		function animateCursor() {
 			ringX += (mouseX - ringX) * 0.12;
 			ringY += (mouseY - ringY) * 0.12;
-			cursorRing.style.left = ringX + "px";
-			cursorRing.style.top = ringY + "px";
+			cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
+			// Park the loop once the ring has caught up with the pointer
+			if (Math.abs(mouseX - ringX) < 0.1 && Math.abs(mouseY - ringY) < 0.1) {
+				ringRunning = false;
+				return;
+			}
 			requestAnimationFrame(animateCursor);
-		})();
+		}
+
+		document.addEventListener(
+			"pointermove",
+			(e) => {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+				if (!ringRunning) {
+					ringRunning = true;
+					requestAnimationFrame(animateCursor);
+				}
+			},
+			{ passive: true },
+		);
 
 		document
 			.querySelectorAll("a, button, .project-card, .skills-button")
@@ -193,8 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 
-	// ── Magnetic Buttons ───────────────────────────────────────────────────────
-	document.querySelectorAll(".btn-cta").forEach((btn) => {
+	// ── Magnetic Buttons (mouse only) ──────────────────────────────────────────
+	const pointerFx = finePointer && !reducedMotion;
+
+	(pointerFx ? document.querySelectorAll(".btn-cta") : []).forEach((btn) => {
 		btn.addEventListener("mousemove", (e) => {
 			const rect = btn.getBoundingClientRect();
 			const x = (e.clientX - rect.left - rect.width / 2) * 0.28;
@@ -210,8 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	});
 
-	// ── 3D Card Tilt ───────────────────────────────────────────────────────────
-	document.querySelectorAll(".project-card").forEach((card) => {
+	// ── 3D Card Tilt (mouse only) ──────────────────────────────────────────────
+	(pointerFx ? document.querySelectorAll(".project-card") : []).forEach((card) => {
 		const TILT = 8;
 
 		card.addEventListener("mousemove", (e) => {
@@ -243,20 +271,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		revealWatchers.forEach((w) => {
 			if (w.done) return;
 			const rect = w.trigger.getBoundingClientRect();
-			if (rect.top < vh * w.threshold && rect.bottom > 0) {
+			if (reducedMotion || (rect.top < vh * w.threshold && rect.bottom > 0)) {
 				w.onReveal();
 				w.done = true;
 			}
 		});
 	}
-
-	// rAF loop — runs every frame until all watchers are resolved
-	(function revealLoop() {
-		checkAllWatchers();
-		if (revealWatchers.some((w) => !w.done)) {
-			requestAnimationFrame(revealLoop);
-		}
-	})();
 
 	// Stagger: children get reveal classes, parent is the scroll trigger
 	function staggerReveal(parentSel, childSel, dirClass, gapMs) {
@@ -358,4 +378,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			0.7,
 		);
 	}
+
+	// Reveal whatever is already on screen at load (no scroll event has fired yet)
+	requestAnimationFrame(checkAllWatchers);
+	window.addEventListener("load", checkAllWatchers);
+	window.addEventListener("resize", checkAllWatchers, { passive: true });
 });
