@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Plant Check: Smart IoT Plant Monitoring System — case study</title>
+		<title>PlantCheck: AI Crop Guard for Rain-Shelter Farms — case study</title>
 		<link rel="icon" type="image/x-icon" href="../assets/favicon.png" />
 		<link rel="stylesheet" href="../assets/css/fonts.css" />
 		<link rel="stylesheet" href="../assets/css/styles.css" />
@@ -39,11 +39,11 @@
 				<div class="case-hero-content">
 					<div class="case-label">CASE STUDY</div>
 					<h1 class="case-hero-title">
-						Plant Check: Smart IoT Plant Monitoring System
+						PlantCheck: AI Crop Guard for Rain-Shelter Farms
 					</h1>
 					<p class="case-hero-subtitle">
-						Live sensor readings, one-hour forecasts and AI disease scans for a
-						potted plant. Won 3rd place at AI Hacker Dorm.
+						Spot disease early. Stop it spreading. 3rd place at AI Hacker Dorm,
+						Track 1: Predictive Model.
 					</p>
 					<div
 						class="tech-stack"
@@ -83,24 +83,24 @@
 					<div class="stat-box">
 						<div class="stat-number">3rd Place</div>
 						<div class="stat-label">
-							AI Hacker Dorm, against university teams nationwide
+							AI Hacker Dorm, Track 1: Predictive Model
 						</div>
 					</div>
 					<div class="stat-box">
-						<div class="stat-number">34 of 55</div>
-						<div class="stat-label">Commits, leading frontend & API work</div>
-					</div>
-					<div class="stat-box">
-						<div class="stat-number">6 pages</div>
+						<div class="stat-number">≈RM26k</div>
 						<div class="stat-label">
-							Overview, disease, prediction, history, report, simulation
+							Saved per hectare each season if half the loss is prevented
 						</div>
 					</div>
 					<div class="stat-box">
 						<div class="stat-number">1 hour</div>
 						<div class="stat-label">
-							Forecast horizon for temperature, humidity & rain
+							Ahead forecast of temperature, humidity & rain
 						</div>
+					</div>
+					<div class="stat-box">
+						<div class="stat-number">34 of 55</div>
+						<div class="stat-label">Commits, leading frontend & API work</div>
 					</div>
 				</section>
 
@@ -110,19 +110,24 @@
 						<div class="section-number">01</div>
 						<h2 class="section-title">Executive Summary</h2>
 						<p class="section-content">
-							Plant Check is a smart plant monitor. An ESP32 reads the climate
-							around a potted plant, a Flask backend logs every reading, and a
-							web dashboard shows the plant's condition, forecasts the next
-							hour, scans leaf photos for disease, and runs the fan and
-							irrigation from a laptop or phone. I built it with Team McLovin
-							for the AI Hacker Dorm competition, where we placed third against
-							university teams from across the country. I led the dashboard and
-							wrote most of the API that connects it to the hardware.
+							PlantCheck is an AI crop guard for smallholder farmers who grow
+							under rain shelters. It watches the air around the crop around the
+							clock, names a disease from one leaf photo, forecasts the
+							conditions that let disease spread, and switches on ventilation and
+							irrigation before the crop is lost.
+						</p>
+						<p class="section-content">
+							We built it as Team McLovin for AI Hacker Dorm's Predictive Model
+							track and placed third against university teams from across the
+							country. An ESP32 reads the sensors, a Flask API logs every reading
+							and runs the forecast model, and a web dashboard turns it all into
+							warnings and controls on a laptop or phone. I led the dashboard and
+							wrote most of the API.
 						</p>
 						<figure class="case-figure">
 							<img
 								src="../assets/images/plant-check-prototype.webp"
-								alt="The Plant Check prototype: an ESP32 with a DHT22 and a soil moisture sensor mounted on a plant box, next to a laptop and a phone showing the dashboard"
+								alt="The PlantCheck prototype: an ESP32 with a DHT22 and a soil moisture sensor mounted on a plant box, next to a laptop and a phone showing the dashboard"
 								width="1600"
 								height="1600"
 								loading="lazy"
@@ -140,39 +145,61 @@
 						<h2 class="section-title">Client & Challenge</h2>
 
 						<p class="section-content">
-							Plant owners usually notice a problem once the leaves have
-							already changed. Simple sensor kits show a number, but they don't
-							explain what it means for the plant, warn before stress sets in,
-							or let you act on it from somewhere else.
+							We designed around one persona: Mr Kumar, a smallholder farmer
+							who grows his crops under a rain shelter in Malaysia. Every
+							season he faces the same three problems.
 						</p>
+
+						<div class="challenge-box">
+							<h3 class="subsection-title">1. Sudden heat and drought</h3>
+							<p class="section-content">
+								A hot, dry spell can stress and wilt his plants within days,
+								before he has time to react.
+							</p>
+						</div>
+						<div class="challenge-box">
+							<h3 class="subsection-title">2. He spots disease too late</h3>
+							<p class="section-content">
+								He checks his plants by eye, so disease is found after it has
+								already spread.
+							</p>
+						</div>
+						<div class="challenge-box">
+							<h3 class="subsection-title">3. He doesn't know how to treat it</h3>
+							<p class="section-content">
+								Even when he finds a sick plant, he isn't sure which disease it
+								is or how to treat it.
+							</p>
+						</div>
+
 						<p class="section-content">
-							Within the competition time limit we had to make hardware, a
-							forecasting model, an AI vision model and a dashboard work
-							together end to end, and keep it working on stage even if the
-							prototype was unplugged.
+							The stakes are high: pests and plant diseases destroy up to 40% of
+							global crop production each year, and diseases alone cost over
+							US$220 billion (FAO, 2021). What Mr Kumar needs is an early
+							warning, clear advice, and a farm that reacts on its own.
 						</p>
 
 						<div class="info-grid">
 							<div class="info-item">
 								<div class="info-label">Industry</div>
-								<div class="info-value">IoT & Smart Agriculture</div>
+								<div class="info-value">Agritech & IoT</div>
 							</div>
 							<div class="info-item">
-								<div class="info-label">Context</div>
+								<div class="info-label">Target Users</div>
 								<div class="info-value">
-									AI Hacker Dorm competition, Team McLovin (5 members)
+									Smallholder rain-shelter farmers in Malaysia
+								</div>
+							</div>
+							<div class="info-item">
+								<div class="info-label">Competition</div>
+								<div class="info-value">
+									AI Hacker Dorm, Track 1: Predictive Model
 								</div>
 							</div>
 							<div class="info-item">
 								<div class="info-label">My Role</div>
 								<div class="info-value">
 									Frontend lead and backend API developer
-								</div>
-							</div>
-							<div class="info-item">
-								<div class="info-label">Stack</div>
-								<div class="info-value">
-									ESP32, Flask, SQLite, Vite, Three.js, scikit-learn, nginx
 								</div>
 							</div>
 						</div>
@@ -182,6 +209,11 @@
 					<section class="case-section">
 						<div class="section-number">03</div>
 						<h2 class="section-title">Our Approach & Solution</h2>
+						<p class="section-content">
+							We set three goals, one for each of Mr Kumar's problems, and
+							brought them together on one dashboard that goes from warning to
+							action.
+						</p>
 
 						<div class="solution-item">
 							<h3 class="subsection-title">
@@ -203,18 +235,62 @@
 										<path
 											class="cls-1"
 											d="M408,177.13v54.1h-26.49v26.36h-26.29v52.82h26.1v44.38h-26.51v26.45h-44.35v-26.28h-52.98v26.64h-26.05v26.23h-54.09v-26.49h-26.35v-26.3h-52.81v26.11h-44.5v-26.65h-26.33v-44.21h26.3v-52.99h-26.63v-26.61H1v-53.31h26.26v-26.47h26.27v-52.97h-26.09v-44.37h26.51v-26.45h44.34v26.29h52.98v-26.64h26.61V.77h53.29v26.27h26.46v26.26h52.96v-26.08h44.37v26.53h26.43v44.35h-26.27v52.99h26.64v26.05h26.23ZM160.38,248.42v26.39h88.32v-26.54h26.34v-88.35h-26.51v-26.28h-88.44v26.48h-26.28v88.31h26.57Z" /></svg></span
-								>Live Dashboard
+								>Automation
 							</h3>
 							<p class="section-content">
-								Built the Overview page: live temperature, humidity and rain
-								chance, the MET Malaysia forecast for Kuching from the
-								data.gov.my weather API, and a Three.js plant whose look
-								follows the readings, the weather and the time of day.
+								Irrigation and ventilation run on their own, so the farm reacts
+								even when the farmer is away. In Automate mode the fan switches
+								on at 32°C or 80% humidity, and the plant is watered for a
+								minute once it reaches 33°C.
 							</p>
 							<p class="section-content">
-								Added fan and irrigation controls that can be switched by hand
-								or left on Automate, plus the Monitoring History and Report
-								pages for daily averages and device activity.
+								The farmer can still take over by hand. Each command goes from
+								the dashboard to the API, and a Python bridge passes it to the
+								ESP32's fan relay and valve within seconds.
+							</p>
+						</div>
+
+						<div class="solution-item">
+							<h3 class="subsection-title">
+								<span class="solution-icon"
+									><svg
+										style="width: 15px; height: 15px"
+										xmlns="http://www.w3.org/2000/svg"
+										id="Layer_4"
+										data-name="Layer 4"
+										viewBox="0 0 408 408">
+										<defs>
+											<style>
+												.cls-1 {
+													fill: #ffffff;
+													stroke-width: 0px;
+												}
+											</style>
+										</defs>
+										<path
+											class="cls-1"
+											d="M.8,407.66V.75h26.62v379.97c1.77.09,3.17.22,4.56.22,124.03,0,248.06,0,372.09,0,1.31,0,2.62-.21,3.93-.32v27.04H.8Z" />
+										<path
+											class="cls-1"
+											d="M301.86,27.07h88.25v327.19h-88.25V27.07Z" />
+										<path
+											class="cls-1"
+											d="M177.95,124.58h88.23v229.65h-88.23V124.58Z" />
+										<path
+											class="cls-1"
+											d="M54.12,354.25v-114.69h88.05v114.69H54.12Z" /></svg></span
+								>Environment Prediction
+							</h3>
+							<p class="section-content">
+								A gradient-boosting model reads the last 6.5 hours of sensor
+								data and forecasts temperature, humidity and rain an hour
+								ahead. It also gives the chance of heat or humidity stress in
+								the next 3 hours, so the farmer can act before conditions turn
+								risky.
+							</p>
+							<p class="section-content">
+								The dashboard pairs this with the official MET Malaysia
+								forecast from the data.gov.my weather API.
 							</p>
 						</div>
 
@@ -280,76 +356,64 @@
 										<path
 											class="cls-1"
 											d="M167.51,238.52c-7.98.05-15.95.09-23.93.14-.07-15.55-.18-31.09-.2-46.64-.01-8.3.13-16.6.2-24.89,7.98.05,15.95.09,23.93.14,0,0-.12-.13-.12-.13v23.91h23.91l-.11-.11v23.91l.11-.11h-23.91v23.91l.12-.13Z" /></svg></span
-								>Hardware-to-Dashboard API
+								>Disease Detection
 							</h3>
 							<p class="section-content">
-								Wrote most of the Flask API. A Python bridge posts each ESP32
-								reading to the API and polls it for the fan and valve state,
-								so a switch on the dashboard reaches the hardware within
-								seconds.
-							</p>
-							<p class="section-content">
-								Readings are saved to SQLite and served back as history,
-								report data and relay state. The dashboard marks the sensor as
-								disconnected once a reading is more than 10 seconds old.
-							</p>
-						</div>
-
-						<div class="solution-item">
-							<h3 class="subsection-title">
-								<span class="solution-icon"
-									><svg
-										style="width: 15px; height: 15px"
-										xmlns="http://www.w3.org/2000/svg"
-										id="Layer_4"
-										data-name="Layer 4"
-										viewBox="0 0 408 408">
-										<defs>
-											<style>
-												.cls-1 {
-													fill: #ffffff;
-													stroke-width: 0px;
-												}
-											</style>
-										</defs>
-										<path
-											class="cls-1"
-											d="M.8,407.66V.75h26.62v379.97c1.77.09,3.17.22,4.56.22,124.03,0,248.06,0,372.09,0,1.31,0,2.62-.21,3.93-.32v27.04H.8Z" />
-										<path
-											class="cls-1"
-											d="M301.86,27.07h88.25v327.19h-88.25V27.07Z" />
-										<path
-											class="cls-1"
-											d="M177.95,124.58h88.23v229.65h-88.23V124.58Z" />
-										<path
-											class="cls-1"
-											d="M54.12,354.25v-114.69h88.05v114.69H54.12Z" /></svg></span
-								>AI Disease Scans & Forecasting
-							</h3>
-							<p class="section-content">
-								The Disease page sends a plant photo to an AI vision model
-								(Qwen 27B) and streams back what it sees and what to do. The
-								request goes through a server-side proxy, so the API
-								credential never reaches the browser. Every scan is saved with
-								its photo.
-							</p>
-							<p class="section-content">
-								Connected a teammate's gradient-boosting model to the API. It
-								uses the last 6.5 hours of readings to forecast temperature,
-								humidity and rain an hour ahead, and the chance of heat or
-								humidity stress in the next 3 hours.
-							</p>
-							<p class="section-content">
-								Built a Simulation page that runs the ESP32, bridge and
-								backend in software, with five 6-hour test scenarios for the
-								model, so the dashboard can be demoed without the prototype.
+								The farmer snaps a leaf photo. An AI vision model (Qwen 27B)
+								names the disease, rates how severe it is and explains what to
+								do next. The request goes through a server-side proxy so the API
+								credential never reaches the browser, and every scan is saved
+								with its photo.
 							</p>
 						</div>
 					</section>
 
-					<!-- 04 - Impact / Results -->
-					<section class="case-section highlight-section">
+					<!-- 04 - My Contribution -->
+					<section class="case-section">
 						<div class="section-number">04</div>
+						<h2 class="section-title">My Contribution</h2>
+						<ul class="bullet-list">
+							<li>
+								Built the dashboard's Overview page: plant health at a glance,
+								live temperature, humidity and rain cards, the weather
+								forecast, and the fan and irrigation controls.
+							</li>
+							<li>
+								Built the Three.js plant scene, which shows the plant as
+								healthy, sick or withered and follows the live weather and
+								time of day.
+							</li>
+							<li>
+								Wrote most of the Flask API: storing readings in SQLite, serving
+								history and report data, relay control, and saving disease scans
+								with their photos.
+							</li>
+							<li>
+								Connected a teammate's forecast model to the API and the
+								Prediction page.
+							</li>
+							<li>
+								Built the Simulation page, which runs the ESP32, bridge and
+								backend in software with five 6-hour test scenarios, so the
+								dashboard can be demoed on stage without the hardware.
+							</li>
+						</ul>
+						<div class="tech-tags" style="margin-top: 1.25rem">
+							<span class="tech-tag">ESP32</span>
+							<span class="tech-tag">Python</span>
+							<span class="tech-tag">Flask</span>
+							<span class="tech-tag">SQLite</span>
+							<span class="tech-tag">scikit-learn</span>
+							<span class="tech-tag">JavaScript</span>
+							<span class="tech-tag">Three.js</span>
+							<span class="tech-tag">Vite</span>
+							<span class="tech-tag">nginx</span>
+						</div>
+					</section>
+
+					<!-- 05 - Impact / Results -->
+					<section class="case-section highlight-section">
+						<div class="section-number">05</div>
 						<h2 class="section-title">Impact & Results</h2>
 						<div class="results-grid">
 							<div class="result-card">
@@ -387,8 +451,8 @@
 								</div>
 								<h3 class="result-title">3rd Place, AI Hacker Dorm</h3>
 								<p class="result-text">
-									Placed third against university teams from across the
-									country
+									Placed third in the Predictive Model track against university
+									teams from across the country
 								</p>
 							</div>
 
@@ -422,10 +486,10 @@
 											d="M54.12,354.25v-114.69h88.05v114.69H54.12Z" />
 									</svg>
 								</div>
-								<h3 class="result-title">Live & Deployed</h3>
+								<h3 class="result-title">≈RM26k per Hectare</h3>
 								<p class="result-text">
-									Running on a VPS at plantcheck.duckdns.org, served by nginx
-									with clean URLs
+									Our estimate of what a farmer saves each season by preventing
+									even half of the usual crop loss
 								</p>
 							</div>
 
@@ -450,10 +514,10 @@
 											d="M186.11-.17h34.99v26.48h26.88v44.31h26.56v35.28c5.29,0,10.06-.08,14.82.02,3.79.08,8.77-.97,10.99,1,1.91,1.69.72,6.94.78,10.62.07,4.96.02,9.92.02,15.26h105.86v70.62h-26.32v26.79h-26.57v176.58h-70.98v-26.31h-44.33v-26.24h-70.57v26.45h-44.33v26.02H52.89v-176.68h-26.59v-26.61H0v-70.78h106.07c0-7.38-.03-14.13,0-20.87.03-6.62-.71-5.81,6.01-5.87,1.85-.02,3.71,0,5.56,0,4.97,0,9.93,0,15.27,0v-35.37h26.38V26.12h26.82V-.17Z" />
 									</svg>
 								</div>
-								<h3 class="result-title">End-to-End Control</h3>
+								<h3 class="result-title">From Warning to Action</h3>
 								<p class="result-text">
-									Readings flow from the sensor to the dashboard, and fan and
-									irrigation commands flow back to the hardware
+									Sensor readings, forecasts and disease scans lead straight to
+									fan and irrigation control on one dashboard
 								</p>
 							</div>
 
@@ -491,25 +555,25 @@
 										<path
 											class="cls-1"
 											d="M191.9,215.3h23.9v23.89l.1-.1h-23.89v-23.89l-.11.1Z" />
+									</svg>
 								</div>
-								<h3 class="result-title">Demo-Ready</h3>
+								<h3 class="result-title">Live & Demo-Ready</h3>
 								<p class="result-text">
-									Simulation mode keeps every page working without the
-									physical prototype
+									Deployed at plantcheck.duckdns.org, with a simulation mode
+									that works without the physical prototype
 								</p>
 							</div>
 						</div>
 					</section>
 
-					<!-- 05 - Team -->
+					<!-- 06 - Team -->
 					<section class="case-section">
-						<div class="section-number">05</div>
+						<div class="section-number">06</div>
 						<h2 class="section-title">The Team</h2>
 						<p class="section-content">
-							Built with Team McLovin, a five-person team. Teammates wrote the
-							ESP32 firmware, trained the forecast model and designed the
-							mobile layout. I led the dashboard and the backend API that ties
-							everything together.
+							Built with Team McLovin. Teammates wrote the ESP32 firmware,
+							trained the forecast model and designed the mobile layout. I led
+							the dashboard and the backend API that ties everything together.
 						</p>
 					</section>
 				</div>
