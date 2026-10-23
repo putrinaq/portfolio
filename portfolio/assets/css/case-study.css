@@ -256,6 +256,29 @@ body {
 	margin-bottom: 1rem;
 }
 
+/* Inline photo */
+.case-figure {
+	margin: 1.25rem 0 0;
+}
+.case-figure img {
+	display: block;
+	width: 100%;
+	max-width: 760px;
+	height: auto;
+	margin-inline: auto;
+	border: 1px solid var(--cs-border);
+	border-radius: 12px;
+}
+.case-figure figcaption {
+	max-width: 760px;
+	margin-inline: auto;
+	font-family: "Tronica Mono", monospace;
+	font-size: 0.85rem;
+	color: var(--cs-fg-dimmer);
+	line-height: 1.6;
+	margin-top: 0.6rem;
+}
+
 /* Bullets */
 .bullet-list {
 	margin: 0.75rem 0 0 0;
